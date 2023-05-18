@@ -52,33 +52,23 @@ class JoinActivity : AppCompatActivity() {
             if (name.isEmpty()) {
                 Toast.makeText(this, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 join = false
-            }
-            if (id.isEmpty()) {
+            } else if (id.isEmpty()) {
                 Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_LONG).show()
                 join = false
-            }
-
-            if (password.isEmpty()) {
+            } else if (password.isEmpty()) {
                 Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_LONG).show()
                 join = false
-            }
-
-            if (passwordCheck.isEmpty()) {
+            } else if (passwordCheck.isEmpty()) {
                 Toast.makeText(this, "비밀번호를 확인해주세요", Toast.LENGTH_LONG).show()
                 join = false
-            }
-
-            // 비밀번호 2개가 같은지 확인
-            if (password != passwordCheck) {
+            } else if (password != passwordCheck) { // 비밀번호 2개가 같은지 확인
                 Toast.makeText(this, "비밀번호를 똑같이 입력해주세요", Toast.LENGTH_LONG).show()
                 join = false
-            }
-
-            // 비밀번호가 8자 이상인지
-            if (password.length < 8) {
+            } else if (password.length < 8) {   // 비밀번호가 8자 이상인지
                 Toast.makeText(this, "비밀번호를 8자리 이상으로 입력해주세요", Toast.LENGTH_LONG).show()
                 join = false
             }
+
 
             if (join) {
                 auth.createUserWithEmailAndPassword(id, password)
