@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/joinbackground"
+        tools:context=".MyPageActivity">
+
+        <!-- 상단바 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/titleBar"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- 돌아가기 버튼 -->
+            <ImageButton
+                android:id="@+id/backBtn"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/backbtn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:src="@drawable/mypagelogo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 홈 버튼 -->
+            <ImageButton
+                android:id="@+id/homeBtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/homebtn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 밥송이 -->
+        <ImageView
+            android:src="@drawable/maincharacter"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"/>
+
+        <!-- 기본 정보 -->
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 이름 + 님 -->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <!-- 이름 받아오기 -->
+                <TextView
+                    android:id="@+id/username"
+                    android:text="이름"
+                    android:textSize="15pt"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- 님 -->
+                <TextView
+                    android:text="님"
+                    android:textSize="15pt"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <!-- 구분선 -->
+            <LinearLayout
+                android:background="#E3E3E3"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"/>
+
+            <!-- 성별, 나이 -->
+            <LinearLayout
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- 성별 받아오기 -->
+                <TextView
+                    android:id="@+id/sex"
+                    android:text="성별"
+                    android:textSize="12pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- 나이 받아오기 -->
+                <TextView
+                    android:id="@+id/age"
+                    android:text="나이"
+                    android:textSize="12pt"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 계정정보 확인 버튼 -->
+            <ImageButton
+                android:id="@+id/checkMyInfoBtn"
+                android:src="@drawable/checkmyinfobtn"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="50dp"/>
+
+            <!-- 식단 기록 확인 버튼 -->
+            <ImageButton
+                android:id="@+id/checkDietBtn"
+                android:src="@drawable/checkdietbtn"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_width="200dp"
+                android:layout_height="50dp"/>
+
+        </LinearLayout>
+
+        <!-- 포인트, 건강 레벨 -->
+        <LinearLayout
+            android:background="@color/titleBar"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 포인트 -->
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- 나의 포인트 -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="나의 포인트"
+                    android:textSize="8pt"
+                    android:textStyle="bold" />
+
+                <!-- 포인트 표시 -->
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <!-- 포인트 불러오기 -->
+                    <TextView
+                        android:id="@+id/point"
+                        android:text="---"
+                        android:textStyle="bold"
+                        android:textSize="10pt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="P"
+                        android:textStyle="bold"
+                        android:textSize="8pt"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 구분선 -->
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_margin="10dp"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"/>
+
+            <!-- 건강 레벨 -->
+            <LinearLayout
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- 나의 레벨 -->
+                <TextView
+                    android:text="나의 건강 레벨"
+                    android:textStyle="bold"
+                    android:textSize="8pt"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <!-- 레벨 받아오기 -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <!-- 텍스트 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <!-- 레벨 불러오기 -->
+                        <TextView
+                            android:id="@+id/level"
+                            android:text="-"
+                            android:textStyle="bold"
+                            android:textSize="10pt"
+                            android:layout_marginLeft="50dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <!-- 레벨 -->
+                        <TextView
+                            android:text="단계"
+                            android:textStyle="bold"
+                            android:textSize="8pt"
+                            android:layout_marginLeft="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+                    <!-- 레벨 별 이미지 받아오기 -->
+                    <ImageView
+                        android:id="@+id/levelicon"
+                        android:src="@drawable/level1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- 포인트 추가 획득, 상품 교환 버튼 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- 포인트 추가 획득 -->
+            <ImageButton
+                android:id="@+id/gainPointBtn"
+                android:src="@drawable/gainpointbtn"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+            <!-- 포인트를 상품으로 -->
+            <ImageButton
+                android:id="@+id/pointChangeBtn"
+                android:src="@drawable/changetogiftbtn"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                android:layout_margin="10dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:src="@drawable/leveldescription"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</layout>
