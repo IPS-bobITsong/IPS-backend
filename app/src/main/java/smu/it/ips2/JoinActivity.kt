@@ -92,6 +92,7 @@ class JoinActivity : AppCompatActivity() {
                             userObject["email"] = id
 
                             val ref = database.getReference("users/$userId/name")
+                            Toast.makeText(this, "[test message] OK(1)", Toast.LENGTH_LONG).show()
                             ref.setValue(userObject).addOnSuccessListener {
                                 Toast.makeText(this, "회원가입에 성공하였습니다.", Toast.LENGTH_LONG).show()
                                 val intent = Intent(this, MainActivity::class.java)
@@ -105,7 +106,7 @@ class JoinActivity : AppCompatActivity() {
                             binding.checkIDText.visibility = View.VISIBLE
                             Toast.makeText(this, "사용불가능한 아이디입니다.", Toast.LENGTH_LONG).show()
                         } else {
-                            Toast.makeText(this, "회원가입에 실패했습니다.", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this, "아이디를 이메일 형식으로 정확히 입력해주세요.", Toast.LENGTH_LONG).show()
                         }
                     }
             }
