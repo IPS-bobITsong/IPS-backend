@@ -99,16 +99,16 @@
 
                 </LinearLayout>
 
-                <!-- 사용 가능한 아이디입니다. -->
+                <!-- 사용 불가능한 아이디 -->
                 <TextView
                     android:id="@+id/checkIDText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:layout_marginRight="20dp"
-                    android:text="* 사용 가능한 아이디입니다."
-                    android:textColor="#3386FF"
-                    android:visibility="visible" />
+                    android:text="* 중복된 아이디입니다."
+                    android:textColor="#8B0000"
+                    android:visibility="invisible" />
 
                 <!-- 비밀번호 -->
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -145,7 +145,7 @@
                             android:layout_height="50dp"
                             android:background="#E8E6E6"
                             android:hint="비밀번호"
-                            android:inputType="text"
+                            android:inputType="textPassword"
                             android:padding="7dp"
                             android:textSize="10pt" />
 
@@ -175,7 +175,7 @@
                             android:layout_height="50dp"
                             android:background="#E8E6E6"
                             android:hint="비밀번호 재입력"
-                            android:inputType="text"
+                            android:inputType="textPassword"
                             android:padding="7dp"
                             android:textSize="10pt" />
 
