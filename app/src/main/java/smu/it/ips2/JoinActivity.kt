@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
@@ -48,6 +50,9 @@ class JoinActivity : AppCompatActivity() {
             var id = binding.inputID.text.toString()
             var password = binding.inputPWD.text.toString()
             var passwordCheck = binding.checkPWD.text.toString()
+            val radioGroup = findViewById<RadioGroup>(R.id.gender)
+            val maleRadioButton = findViewById<RadioButton>(R.id.male)
+            val femaleRadioButton = findViewById<RadioButton>(R.id.female)
 
             if (name.isEmpty()) {
                 Toast.makeText(this, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
@@ -66,6 +71,9 @@ class JoinActivity : AppCompatActivity() {
                 join = false
             } else if (password.length < 8) {   // 비밀번호가 8자 이상인지
                 Toast.makeText(this, "비밀번호를 8자리 이상으로 입력해주세요", Toast.LENGTH_LONG).show()
+                join = false
+            } else if (radioGroup.checkedRadioButtonId == -1) { // RadioGroup 선택 여부 확인
+                Toast.makeText(this, "성별을 선택해주세요", Toast.LENGTH_LONG).show()
                 join = false
             }
 
