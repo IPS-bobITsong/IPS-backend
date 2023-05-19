@@ -17,6 +17,7 @@ class MyPageActivity : AppCompatActivity() {
 
     private lateinit var database: FirebaseDatabase
     private lateinit var binding : ActivityMyPageBinding
+    private lateinit var hi :FirebaseAuth
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
