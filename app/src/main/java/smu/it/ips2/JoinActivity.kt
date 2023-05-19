@@ -54,6 +54,33 @@ class JoinActivity : AppCompatActivity() {
             val maleRadioButton = findViewById<RadioButton>(R.id.male)
             val femaleRadioButton = findViewById<RadioButton>(R.id.female)
 
+            var age = String()
+
+            //나이 데이터베이스로 들어가게 하기
+            val spinner = binding.selectAge
+            spinner.adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.ageList,
+                android.R.layout.simple_spinner_item
+            )
+            spinner.setSelection(-1)
+            spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) { if (position > 0) {
+                        age = parent?.getItemAtPosition(position).toString()
+                    }
+                }
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                }
+            }
+
+
+
             if (name.isEmpty()) {
                 Toast.makeText(this, "이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 join = false
@@ -88,8 +115,9 @@ class JoinActivity : AppCompatActivity() {
                             val userObject = HashMap<String, String>()
                             userObject["name"] = name
                             userObject["email"] = id
+                            userObject["age"] = age
 
-                            val ref = database.getReference("users/$userId/name")
+                            val ref = database.getReference("users/$userId")
                             Toast.makeText(this, "[test message] OK(1)", Toast.LENGTH_LONG).show()
                             ref.setValue(userObject).addOnSuccessListener {
                                 Toast.makeText(this, "회원가입에 성공하였습니다.", Toast.LENGTH_LONG).show()
@@ -121,37 +149,6 @@ class JoinActivity : AppCompatActivity() {
         binding.exitBtn.setOnClickListener {
             intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
-        }
-
-        val spinner = binding.selectAge
-        spinner.adapter = ArrayAdapter.createFromResource(
-            this,
-            R.array.ageList,
-            android.R.layout.simple_spinner_item
-        )
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                if (position > 0) {
-                    val selectedAge = parent?.getItemAtPosition(position).toString()
-
-                    val intent = Intent(this@JoinActivity, MyPageActivity::class.java)
-                    intent.putExtra("userAge", selectedAge)
-
-                    Toast.makeText(
-                        this@JoinActivity,
-                        "나이가 $selectedAge 로 선택되었어요!",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
         }
     }
 
