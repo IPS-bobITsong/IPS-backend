@@ -33,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
+                        Toast.makeText(this, "로그인에 성공했어요", Toast.LENGTH_LONG).show()
                     }else {
                         Toast.makeText(this, "로그인에 실패했어요", Toast.LENGTH_LONG).show()
                     }
