@@ -16,6 +16,7 @@
         android:background="@color/titleBar"
         app:layout_constraintTop_toTopOf="parent">
 
+
         <!-- 이전 버튼 -->
         <ImageButton
             android:id="@+id/backBtn"
