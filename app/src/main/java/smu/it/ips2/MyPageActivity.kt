@@ -45,7 +45,7 @@ class MyPageActivity : AppCompatActivity() {
                     // 사용자 나이 사용
                     if (age != null) {
                         runOnUiThread {
-                            binding.age.text = age
+                            binding.age.text = age + "세"
                         }
                     }
                 }
