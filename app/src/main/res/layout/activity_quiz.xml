@@ -75,17 +75,44 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <!-- 퀴즈 문제 틀 -->
-            <ImageView
-                android:id="@+id/imageView3"
+<!--            &lt;!&ndash; 퀴즈 문제 틀 &ndash;&gt;-->
+<!--            <ImageView-->
+<!--                android:id="@+id/imageView3"-->
+<!--                android:layout_width="350dp"-->
+<!--                android:layout_height="250dp"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:scaleType="fitXY"-->
+<!--                android:src="@drawable/giftsample"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+            <FrameLayout
                 android:layout_width="350dp"
                 android:layout_height="250dp"
                 android:layout_margin="10dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/giftsample"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/giftsample" />
+
+                <TextView
+                    android:text="퀴즈의 정답은 무엇일까?"
+                    android:textSize="11pt"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </FrameLayout>
 
             <ImageView
                 android:layout_width="100dp"
