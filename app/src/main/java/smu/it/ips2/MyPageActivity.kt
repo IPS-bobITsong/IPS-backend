@@ -66,6 +66,32 @@ class MyPageActivity : AppCompatActivity() {
 
                 }
             })
+            database.getReference("users").child(userId).child("point").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val point = dataSnapshot.getValue(String::class.java)
+                    if (point != null) {
+                        runOnUiThread {
+                            binding.point.text = point
+                        }
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+
+                }
+            })
+            database.getReference("users").child(userId).child("level").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val level = dataSnapshot.getValue(String::class.java)
+                    if (level != null) {
+                        runOnUiThread {
+                            binding.level.text = level
+                        }
+                    }
+                }
+                override fun onCancelled(databaseError: DatabaseError) {
+
+                }
+            })
         }
         // 이전 화면으로 이동
         binding.backBtn.setOnClickListener {
