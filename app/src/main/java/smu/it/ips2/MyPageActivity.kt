@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import smu.it.ips2.databinding.ActivityMyPageBinding
@@ -30,43 +29,41 @@ class MyPageActivity : AppCompatActivity() {
             database.getReference("users").child(userId).child("name").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val name = dataSnapshot.getValue(String::class.java)
-                    // 사용자 이름 사용
                     if (name != null) {
-                        runOnUiThread { // UI 업데이트는 UI 스레드에서 실행되어야 함
+                        runOnUiThread {
                             binding.username.text = name
                         }
                     }
                 }
                 override fun onCancelled(databaseError: DatabaseError) {
-                    // 에러 처리\
+
                 }
             })
             database.getReference("users").child(userId).child("age").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val age = dataSnapshot.getValue(String::class.java)
-                    // 사용자 이름 사용
+                    // 사용자 나이 사용
                     if (age != null) {
-                        runOnUiThread { // UI 업데이트는 UI 스레드에서 실행되어야 함
+                        runOnUiThread {
                             binding.age.text = age
                         }
                     }
                 }
                 override fun onCancelled(databaseError: DatabaseError) {
-                    // 에러 처리\
+
                 }
             })
             database.getReference("users").child(userId).child("sex").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val sex = dataSnapshot.getValue(String::class.java)
-                    // 사용자 이름 사용
                     if (sex != null) {
-                        runOnUiThread { // UI 업데이트는 UI 스레드에서 실행되어야 함
+                        runOnUiThread {
                             binding.sex.text = sex
                         }
                     }
                 }
                 override fun onCancelled(databaseError: DatabaseError) {
-                    // 에러 처리\
+
                 }
             })
         }
