@@ -85,11 +85,29 @@
         </LinearLayout>
 
         <!-- 카드 뉴스 -->
-        <ImageView
-            android:layout_margin="20dp"
-            android:src="@drawable/giftsample"
+<!--        <ImageView-->
+<!--            android:layout_margin="20dp"-->
+<!--            android:src="@drawable/giftsample"-->
+<!--            android:layout_width="350dp"-->
+<!--            android:layout_height="350dp"/>-->
+        <FrameLayout
             android:layout_width="350dp"
-            android:layout_height="350dp"/>
+            android:layout_height="350dp">
+
+            <ImageView
+                android:layout_margin="20dp"
+                android:src="@drawable/giftsample"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <ImageView
+                android:layout_margin="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/health_article" />
+
+        </FrameLayout>
 
         <!-- 퀴즈 버튼 -->
         <ImageButton
