@@ -126,34 +126,35 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- 선지 -->
-        <LinearLayout
+        <RadioGroup
+            android:id="@+id/answerGroup"
             android:layout_gravity="center"
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <RadioButton
-                android:id="@+id/option1"
+                android:id="@+id/answer1"
                 android:text="선지 1"
                 android:textSize="10pt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <RadioButton
-                android:id="@+id/option2"
+                android:id="@+id/answer2"
                 android:text="선지 2"
                 android:textSize="10pt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
             <RadioButton
-                android:id="@+id/option3"
+                android:id="@+id/answer3"
                 android:text="선지 3"
                 android:textSize="10pt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
-        </LinearLayout>
+        </RadioGroup>
 
         <ImageButton
             android:id="@+id/checkAnswerBtn"
