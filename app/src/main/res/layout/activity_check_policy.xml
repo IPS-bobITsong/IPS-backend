@@ -207,6 +207,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_width="100dp"
-        android:layout_height="50dp"/>
+        android:layout_height="50dp"
+        android:contentDescription="동의 버튼"/>
 
 </LinearLayout>

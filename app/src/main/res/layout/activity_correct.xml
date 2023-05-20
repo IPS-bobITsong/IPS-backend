@@ -36,7 +36,8 @@
             android:src="@drawable/homebtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="홈으로 가기 버튼" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -106,7 +107,8 @@
             android:layout_gravity="center"
             android:background="@android:color/transparent"
             android:scaleType="fitXY"
-            android:src="@drawable/checkbtn" />
+            android:src="@drawable/checkbtn"
+            android:contentDescription="확인 버튼" />
     </LinearLayout>
 
     <!-- 광고 배너 -->

@@ -27,8 +27,9 @@
             android:src="@drawable/backbtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="이전으로 가기 버튼" />
+전
         <ImageView
             android:layout_width="250dp"
             android:layout_height="50dp"
@@ -49,7 +50,8 @@
             android:src="@drawable/homebtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="홈으로 가기 버튼" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -198,13 +200,17 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/giftsample" />
+                        android:src="@drawable/giftsample"
+                        android:contentDescription="교환 가능 상품1 버튼" />
 
                     <ImageView
                         android:id="@+id/extraImage1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
                         android:scaleType="fitXY"
                         android:src="@drawable/gift1" />
                 </RelativeLayout>
@@ -220,12 +226,17 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/giftsample" />
+                        android:src="@drawable/giftsample"
+                        android:contentDescription="교환 가능 상품2 버튼" />
+
                     <ImageView
                         android:id="@+id/extraImage2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
                         android:scaleType="fitXY"
                         android:src="@drawable/gift2" />
                 </RelativeLayout>
@@ -241,12 +252,17 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/giftsample" />
+                        android:src="@drawable/giftsample"
+                        android:contentDescription="교환 가능 상품3 버튼" />
+
                     <ImageView
                         android:id="@+id/extraImage3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
                         android:scaleType="fitXY"
                         android:src="@drawable/gift3" />
                 </RelativeLayout>
@@ -262,14 +278,20 @@
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
                         android:scaleType="fitXY"
-                        android:src="@drawable/giftsample" />
+                        android:src="@drawable/giftsample"
+                        android:contentDescription="교환 가능 상품4 버튼" />
+
                     <ImageView
                         android:id="@+id/extraImage4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
                         android:scaleType="fitXY"
-                        android:src="@drawable/gift4" />
+                        android:src="@drawable/gift4"
+                        android:contentDescription="교환 가능 상품4 버튼" />
                 </RelativeLayout>
 
             </LinearLayout>
@@ -281,7 +303,8 @@
                 android:background="@android:color/transparent"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_marginBottom="15dp" />
+                android:layout_marginBottom="15dp"
+                android:contentDescription="다운로드 버튼" />
 
         </LinearLayout>
 

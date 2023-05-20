@@ -17,7 +17,8 @@
         android:src="@drawable/bookmarkbeforebtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="북마크 버튼" />
 
     <!-- 식당 이름 -->
     <TextView

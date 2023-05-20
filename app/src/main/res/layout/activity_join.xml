@@ -18,7 +18,8 @@
             android:layout_margin="10dp"
             android:background="@drawable/exitbtn"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="회원가입 창 닫기  버튼"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,7 +148,8 @@
                             android:hint="비밀번호"
                             android:inputType="textPassword"
                             android:padding="7dp"
-                            android:textSize="10pt" />
+                            android:textSize="10pt"
+                            android:speakableText="no" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -177,7 +179,8 @@
                             android:hint="비밀번호 재입력"
                             android:inputType="textPassword"
                             android:padding="7dp"
-                            android:textSize="10pt" />
+                            android:textSize="10pt"
+                            android:speakableText="no" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -276,7 +279,8 @@
                         android:scaleType="fitXY"
                         android:layout_width="200dp"
                         android:layout_height="50dp"
-                        android:layout_marginRight="10dp" />
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="이용약관 확인하기 버튼" />
 
                     <ImageButton
                         android:id="@+id/joinBtn"
@@ -284,7 +288,8 @@
                         android:scaleType="fitXY"
                         android:background="@android:color/transparent"
                         android:layout_width="160dp"
-                        android:layout_height="50dp"/>
+                        android:layout_height="50dp"
+                        android:contentDescription="회원가입 버튼"/>
 
                 </LinearLayout>
 
