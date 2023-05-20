@@ -85,15 +85,16 @@ class JoinActivity : AppCompatActivity() {
     }
 
    private fun joinAccount(age: String) {
-        var join = true
-        var name = binding.inputName.text.toString()
-        var id = binding.inputID.text.toString()
-        var password = binding.inputPWD.text.toString()
-        var passwordCheck = binding.checkPWD.text.toString()
-        val radioGroup = findViewById<RadioGroup>(R.id.gender)
+       var join = true
+       var name = binding.inputName.text.toString()
+       var id = binding.inputID.text.toString()
+       var password = binding.inputPWD.text.toString()
+       var passwordCheck = binding.checkPWD.text.toString()
+       val radioGroup = findViewById<RadioGroup>(R.id.gender)
        var maleRadioButton = binding.male
        var femaleRadioButton = binding.female
        var sex = String()
+       var point: String = "0"
 
        //성별 라디오버튼 체크 받아오기
        if (maleRadioButton.isChecked) {
@@ -138,6 +139,7 @@ class JoinActivity : AppCompatActivity() {
                         userObject["email"] = id
                         userObject["sex"] = sex
                         userObject["age"] = age
+                        userObject["point"] = point // 포인트 초기값 : 0
 
                         val ref = database.getReference("users/$userId")
                         ref.setValue(userObject).addOnSuccessListener {
