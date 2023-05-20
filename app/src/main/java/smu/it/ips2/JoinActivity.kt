@@ -95,6 +95,7 @@ class JoinActivity : AppCompatActivity() {
        var femaleRadioButton = binding.female
        var sex = String()
        var point: String = "0"
+       var level: String = "1"
 
        //성별 라디오버튼 체크 받아오기
        if (maleRadioButton.isChecked) {
@@ -140,6 +141,7 @@ class JoinActivity : AppCompatActivity() {
                         userObject["sex"] = sex
                         userObject["age"] = age
                         userObject["point"] = point // 포인트 초기값 : 0
+                        userObject["level"] = level // 건강레벨 초기값 : 1
 
                         val ref = database.getReference("users/$userId")
                         ref.setValue(userObject).addOnSuccessListener {
