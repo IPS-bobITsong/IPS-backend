@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "460113897860",
+    "firebase_url": "https://ips-babitsong-default-rtdb.firebaseio.com",
     "project_id": "ips-babitsong",
     "storage_bucket": "ips-babitsong.appspot.com"
   },
