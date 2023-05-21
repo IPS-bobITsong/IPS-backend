@@ -4,8 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import androidx.viewpager2.widget.ViewPager2
 
 class DetailActivity : AppCompatActivity() {
+
+    lateinit var viewPager_card: ViewPager2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -34,5 +37,17 @@ class DetailActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.buttonRecommend2).setOnClickListener {
 
         }
+
+        viewPager_card = findViewById(R.id.cardNews)
+        viewPager_card.adapter = ViewPagerAdapter(getCardNews()) // 어댑터 생성
+        viewPager_card.orientation = ViewPager2.ORIENTATION_HORIZONTAL // 방향을 가로로
     }
+
+    private fun getCardNews(): ArrayList<Int> {
+        return arrayListOf<Int>(
+            R.drawable.na1,
+            R.drawable.na2,
+            R.drawable.na3)
+    }
+
 }

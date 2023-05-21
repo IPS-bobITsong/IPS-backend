@@ -28,7 +28,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="이전으로 가기 버튼" />
+            android:contentDescription="이전으로 가기 버튼"/>
 
         <ImageView
             android:layout_width="250dp"
@@ -51,7 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/homeBtn"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="마이페이지로 가기 버튼" />
+            android:contentDescription="마이페이지로 가기 버튼"/>
 
         <!-- 홈 버튼 -->
         <ImageButton
@@ -65,7 +65,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="홈으로 가기 버튼" />
+            android:contentDescription="홈으로 가기 버튼"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -83,7 +83,7 @@
             android:layout_height="30dp"
             android:layout_gravity="end"
             android:background="@drawable/exitbtn"
-            android:contentDescription="닫기 버튼" />
+            android:contentDescription="닫기 버튼"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -122,11 +122,11 @@
         </LinearLayout>
 
         <!-- 카드 뉴스 -->
-        <ImageView
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/cardNews"
             android:layout_width="350dp"
             android:layout_height="350dp"
-            android:layout_margin="20dp"
-            android:src="@drawable/giftsample" />
+            android:layout_margin="20dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
