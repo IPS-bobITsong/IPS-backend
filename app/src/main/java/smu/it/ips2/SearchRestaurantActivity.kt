@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.FirebaseDatabase
+
 class SearchRestaurantActivity : AppCompatActivity() {
     var firestore : FirebaseFirestore? = null
 
