@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/quizbackground"
-    tools:context=".GainPointActivity">
+    tools:context=".QuizBrainActivity">
 
     <!-- 상단바 -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +32,7 @@
         <ImageView
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:src="@drawable/gainpointlogo"
+            android:src="@drawable/quizlogo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,42 +62,84 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-        <LinearLayout
+        <TextView
+            android:text="QUIZ"
+            android:textSize="20pt"
+            android:textStyle="bold"
+            android:textColor="#FF3D3D"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="아래의 건강기사를 읽고"
-                android:textSize="12pt"
-                android:textStyle="bold" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            <TextView
+            <!-- 퀴즈 문제-->
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="300dp"
+                android:layout_height="270dp"
+                android:layout_margin="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/brainquiz"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 선지 -->
+        <LinearLayout
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioGroup
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="퀴즈를 풀어보세요!"
-                android:textSize="12pt"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/option1"
+                    android:text="바른 자세 유지하기"
+                    android:textSize="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:id="@+id/option2"
+                    android:text="낮잠 많이 자기"
+                    android:textSize="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:id="@+id/option3"
+                    android:text="가벼운 스트레칭하기"
+                    android:textSize="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <RadioButton
+                    android:id="@+id/option4"
+                    android:text="자극적인 음식 피하기"
+                    android:textSize="10pt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </RadioGroup>
+
         </LinearLayout>
 
-        <!-- 카드 뉴스 -->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vpArticle"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:layout_margin="10dp"/>
-
-        <!-- 퀴즈 버튼 -->
         <ImageButton
-            android:id="@+id/quizBtn"
-            android:src="@drawable/quizbtn"
+            android:id="@+id/checkAnswerBtn"
+            android:src="@drawable/checkanswerbtn"
             android:scaleType="fitXY"
             android:background="@android:color/transparent"
             android:layout_gravity="center"
+            android:layout_margin="10dp"
             android:layout_width="160dp"
             android:layout_height="55dp"/>
 

@@ -22,8 +22,8 @@ class QuizAdapter(
         val row = tempRow!!
 
         val data = mList[position]
-        val number = row.findViewById<TextView>(R.id.quizNum)
-        val name = row.findViewById<TextView>(R.id.quizName)
+        val number = row.findViewById<TextView>(R.id.articleNum)
+        val name = row.findViewById<TextView>(R.id.articleName)
         number.text = "${data.quiznum}"
         name.text = "${data.quizname}"
 

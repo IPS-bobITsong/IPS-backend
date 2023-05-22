@@ -7,18 +7,6 @@
     android:layout_height="wrap_content"
     android:padding="10dp">
 
-    <!-- 선택 취소 -->
-    <ImageButton
-        android:id="@+id/cancelBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitXY"
-        android:src="@drawable/exitbtn"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <!-- 메뉴 이름 -->
     <TextView
         android:id="@+id/menuName"

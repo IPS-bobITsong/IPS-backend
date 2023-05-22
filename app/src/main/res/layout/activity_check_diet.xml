@@ -26,8 +26,7 @@
             android:src="@drawable/backbtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="이전으로 가기 버튼" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="250dp"
@@ -49,8 +48,7 @@
             android:src="@drawable/homebtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="홈으로 가기 버튼" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -74,7 +72,6 @@
         android:src="@drawable/checkbtn"
         android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:contentDescription="확인 버튼" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

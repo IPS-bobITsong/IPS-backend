@@ -27,8 +27,7 @@
             android:src="@drawable/backbtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="이전으로 돌아가기 버튼" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="250dp"
@@ -50,8 +49,7 @@
             android:layout_margin="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/homeBtn"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="마이페이지로 가기 버튼" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!-- 홈 버튼 -->
         <ImageButton
@@ -64,8 +62,7 @@
             android:src="@drawable/homebtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="홈으로 가기 버튼" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,8 +90,7 @@
             android:layout_marginLeft="5dp"
             android:background="@android:color/transparent"
             android:scaleType="fitXY"
-            android:src="@drawable/searchbeforebtn"
-            android:contentDescription="메뉴 검색 버튼" />
+            android:src="@drawable/searchbeforebtn" />
 
     </LinearLayout>
 
@@ -157,8 +153,7 @@
             android:layout_marginTop="5dp"
             android:layout_gravity="end"
             android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:contentDescription="선택완료 버튼"/>
+            android:layout_height="50dp"/>
 
     </LinearLayout>
 

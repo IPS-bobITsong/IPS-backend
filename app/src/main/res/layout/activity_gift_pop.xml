@@ -52,8 +52,7 @@
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:contentDescription="확인 버튼" />
+            android:layout_margin="10dp" />
 
     </LinearLayout>
 

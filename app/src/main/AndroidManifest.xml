@@ -46,6 +46,33 @@
             android:name=".QuizActivity"
             android:exported="false" />
         <activity
+            android:name=".QuizBrainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizCarboActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizConfidenceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizFatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizOverActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizProteinActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizSchoolActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizSodiumActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizSugarActivity"
+            android:exported="false" />
+        <activity
             android:name=".GainPointActivity"
             android:exported="false" />
         <activity
