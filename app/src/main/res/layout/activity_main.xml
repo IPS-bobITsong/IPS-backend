@@ -36,8 +36,7 @@
             android:src="@drawable/mypagebtn"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="마이페이지로 가기 버튼" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -76,8 +75,7 @@
             android:layout_width="200dp"
             android:layout_height="55dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:contentDescription="가맹점 입력하기 버튼" />
+            android:layout_marginTop="20dp" />
 
     </LinearLayout>
 

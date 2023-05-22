@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/quizbackground"
-    tools:context=".QuizOverweightActivity">
+    tools:context=".QuizOverActivity">
 
     <!-- 상단바 -->
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -59,8 +59,7 @@
                 android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:contentDescription="네 버튼"/>
+                android:layout_weight="1"/>
 
             <ImageButton
                 android:id="@+id/applyNoBtn"
@@ -71,8 +70,7 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:layout_marginLeft="20dp"
-                android:contentDescription="아니요 버튼" />
+                android:layout_marginLeft="20dp" />
 
         </LinearLayout>
 

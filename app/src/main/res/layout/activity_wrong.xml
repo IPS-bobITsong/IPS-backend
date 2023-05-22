@@ -143,8 +143,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:scaleType="fitXY"
-                android:src="@drawable/checkbtn"
-                android:contentDescription="확인 버튼" />
+                android:src="@drawable/checkbtn" />
 
         </LinearLayout>
 

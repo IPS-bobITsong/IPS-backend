@@ -51,10 +51,9 @@
                     android:layout_height="50dp"
                     android:background="#E8E6E6"
                     android:hint="비밀번호"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:padding="7dp"
-                    android:textSize="10pt"
-                    android:importantForAccessibility="no" />
+                    android:textSize="10pt" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,8 +105,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/loginbtn"
-                    android:importantForAccessibility="no" />
+                    android:src="@drawable/loginbtn" />
 
                 <ImageButton
                     android:id="@+id/buttonSignUp"
@@ -118,8 +116,7 @@
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
                     android:scaleType="fitXY"
-                    android:src="@drawable/joinbtn"
-                    android:importantForAccessibility="no" />
+                    android:src="@drawable/joinbtn" />
 
             </LinearLayout>
 
