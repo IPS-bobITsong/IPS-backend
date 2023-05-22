@@ -50,6 +50,9 @@ class GainPointActivity : AppCompatActivity() {
             } else if (quizPage.toString() == "비만 예방") {
                 intent = Intent(this, QuizOverActivity::class.java)
                 startActivity(intent)
+            } else if (quizPage.toString() == "두뇌 회전") {
+                intent = Intent(this, QuizBrainActivity::class.java)
+                startActivity(intent)
             }
         }
 
