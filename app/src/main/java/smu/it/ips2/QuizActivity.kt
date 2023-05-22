@@ -10,7 +10,8 @@ import android.widget.RadioGroup
 class QuizActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quiz)
+//        setContentView(R.layout.activity_quiz)
+        setContentView(R.layout.activity_quiz_carbohydrate)
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
             intent = Intent(this, GainPointActivity::class.java)
