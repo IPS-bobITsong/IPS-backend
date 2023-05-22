@@ -82,8 +82,8 @@ class GainPointActivity : AppCompatActivity() {
     }
         private fun getArticles1(): ArrayList<Int> {
             return arrayListOf<Int>(
-                R.drawable.article1_1,)
-            R.drawable.article1_1,)
+                R.drawable.carbohydrate_article1,)
+            R.drawable.carbohydrate_article2,)
             R.drawable.article1_1)
         }
         private fun getArticles2(): ArrayList<Int> {
