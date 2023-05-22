@@ -8,13 +8,13 @@ import androidx.viewpager2.widget.ViewPager2
 
 
 class GainPointActivity : AppCompatActivity() {
-    private lateinit var viewPager_article : ViewPager2
+    lateinit var viewPager_article : ViewPager2
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gain_point)
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
-            intent = Intent(this, GainPointListActivity::class.java)
+            intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
 
@@ -32,51 +32,51 @@ class GainPointActivity : AppCompatActivity() {
         val article = intent.getStringExtra("quizes")
         when (article) {
             "건강기사 1" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles1())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles1())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
 
             "건강기사 1" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles1())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles1())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
 
             "건강기사 2" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles2())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles2())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
 
             "건강기사 3" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles3())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles3())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
 
             "건강기사 4" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles4())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles4())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
 
             "건강기사 5" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles5())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles5())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
 
             "건강기사 6" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles6())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles6())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
 
             "건강기사 7" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles7())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles7())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
 
             "건강기사 8" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles8())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles8())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
             "건강기사 9" -> {
-                viewPager_article.adapter = ViewPagerAdapterArticle(getArticles8())
+                viewPager_article.adapter = ViewPagerAdapter(getArticles8())
                 viewPager_article.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             }
         }
