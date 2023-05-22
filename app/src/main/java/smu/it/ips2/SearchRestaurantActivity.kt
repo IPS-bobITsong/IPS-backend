@@ -58,7 +58,8 @@ class SearchRestaurantActivity() : AppCompatActivity() {
 
     }
     inner class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-        var storeBook : ArrayList<RestaurantBook> = arrayListOf()
+        private val storeBook: ArrayList<RestaurantBook> = arrayListOf()
+        private val uniqueResNames: HashSet<String> = hashSetOf()
 
         init {
             // 파이어스토어 인스턴스 초기화
@@ -87,11 +88,21 @@ class SearchRestaurantActivity() : AppCompatActivity() {
             val resname: TextView = view.findViewById(R.id.restaurantName)
         }
 
-        // onCreateViewHolder에서 만든 view와 실제 데이터를 연결
+        // onCreateViewHolder에서 만든 view와 실제 데이터를 연결 (가맹점이름 중복일 경우, 숨김 처리)
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val viewHolder = holder as ViewHolder
-            viewHolder.resname.text = storeBook[position].resname
+            val currentRestaurant = storeBook[position]
+            if (position > 0 && currentRestaurant.resname == storeBook[position - 1].resname) {
+                viewHolder.itemView.layoutParams.height = 0 // 숨겨진 칸 높이 0으로 설정하여 공백 없도록
+                viewHolder.itemView.visibility = View.GONE
+            } else {
+                viewHolder.itemView.visibility = View.VISIBLE
+                viewHolder.resname.text = currentRestaurant.resname
+            }
         }
+
+
+
 
         // 리사이클러뷰의 아이템 총 개수 반환
         override fun getItemCount(): Int {
