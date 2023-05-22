@@ -13,6 +13,18 @@
         android:theme="@style/Theme.IPS"
         tools:targetApi="31">
         <activity
+            android:name=".QuizSchoolActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizConfidenceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizOverweightActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizBrainActivity"
+            android:exported="false" />
+        <activity
             android:name=".CheckMyInfoActivity"
             android:exported="false" />
         <activity
