@@ -84,9 +84,23 @@ class SearchRestaurantActivity() : AppCompatActivity() {
             return ViewHolder(view)
         }
 
+        // ViewHolder 클래스 내부에 클릭 이벤트 처리를 추가합니다.
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val resname: TextView = view.findViewById(R.id.restaurantName)
+
+            init {
+                view.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val restaurantBook = storeBook[position]
+                        val intent = Intent(view.context, SearchMenuActivity::class.java)
+                        intent.putExtra("resname", restaurantBook.resname)
+                        view.context.startActivity(intent)
+                    }
+                }
+            }
         }
+
 
         // onCreateViewHolder에서 만든 view와 실제 데이터를 연결 (가맹점이름 중복일 경우, 숨김 처리)
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
