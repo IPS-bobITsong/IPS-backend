@@ -49,6 +49,9 @@
             android:name=".GainPointActivity"
             android:exported="false" />
         <activity
+            android:name=".GainPointListActivity"
+            android:exported="false" />
+        <activity
             android:name=".GiftPopActivity"
             android:theme="@style/Theme.MyDialog" />
         <activity

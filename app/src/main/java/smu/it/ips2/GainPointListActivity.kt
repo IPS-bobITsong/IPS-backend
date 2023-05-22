@@ -33,8 +33,8 @@ class GainPointListActivity : BaseActivity() {
 
         findViewById<ListView>(R.id.quizListView).setOnItemClickListener { adapterView, view, i, l ->
 
-            val clickedQuiz = quizList[i]
-            val myIntent = Intent(mContext, ExGainpointactivity::class.java)
+            val clickedQuiz = quizList[i].quiznum
+            val myIntent = Intent(mContext, GainPointActivity::class.java)
             myIntent.putExtra("quizes", clickedQuiz)
             startActivity(myIntent)
         }
