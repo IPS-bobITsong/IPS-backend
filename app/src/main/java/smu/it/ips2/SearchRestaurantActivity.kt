@@ -1,14 +1,14 @@
 package smu.it.ips2
 
 import android.content.Intent
-import android.widget.ImageButton
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -17,7 +17,7 @@ class SearchRestaurantActivity() : AppCompatActivity() {
     var firestore : FirebaseFirestore? = null
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var recyclerViewAdapter: SearchRestaurantActivity.RecyclerViewAdapter
+//    private lateinit var recyclerViewAdapter: SearchRestaurantActivity.RecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,6 @@ class SearchRestaurantActivity() : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
 
         recyclerView = findViewById(R.id.restaurantList)
-
         recyclerView.adapter= RecyclerViewAdapter()
         recyclerView.layoutManager= LinearLayoutManager(this)
 
