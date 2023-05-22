@@ -55,14 +55,11 @@
             android:name=".CorrectActivity"
             android:exported="false" />
         <activity
-            android:name=".QuizActivity"
-            android:exported="false" />
-        <activity
             android:name=".QuizBrainActivity"
             android:exported="false" />
         <activity
             android:name=".QuizCarboActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".QuizConfidenceActivity"
             android:exported="false" />
@@ -89,7 +86,7 @@
             android:exported="false" />
         <activity
             android:name=".GainPointListActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".GiftPopActivity"
             android:theme="@style/Theme.MyDialog" />

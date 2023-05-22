@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
 
 class WrongActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,5 +25,8 @@ class WrongActivity : AppCompatActivity() {
             intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
         }
+
+        var correct = intent.getStringExtra("answer")
+        findViewById<TextView>(R.id.answer).text = correct
+        }
     }
-}

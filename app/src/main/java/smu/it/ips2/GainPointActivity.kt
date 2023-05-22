@@ -13,6 +13,8 @@ class GainPointActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_gain_point)
 
+        var quizPage = intent.getStringExtra("article")
+
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
             intent = Intent(this, GainPointListActivity::class.java)
             startActivity(intent)
@@ -24,8 +26,34 @@ class GainPointActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.quizBtn).setOnClickListener {
-            intent = Intent(this, QuizActivity::class.java)
-            startActivity(intent)
+            if (quizPage.toString() == "탄수화물") {
+                intent = Intent(this, QuizCarboActivity::class.java)
+                startActivity(intent)
+            } else if (quizPage.toString() == "단백질") {
+                intent = Intent(this, QuizProteinActivity::class.java)
+                startActivity(intent)
+            } else if (quizPage.toString() == "지방") {
+                intent = Intent(this, QuizFatActivity::class.java)
+                startActivity(intent)
+            } else if (quizPage.toString() == "당류") {
+                intent = Intent(this, QuizSugarActivity::class.java)
+                startActivity(intent)
+            } else if (quizPage.toString() == "나트륨") {
+                intent = Intent(this, QuizSodiumActivity::class.java)
+                startActivity(intent)
+            } else if (quizPage.toString() == "건강한 학교생활") {
+                intent = Intent(this, QuizSchoolActivity::class.java)
+                startActivity(intent)
+            } else if (quizPage.toString() == "건강한 신체와 자신감") {
+                intent = Intent(this, QuizConfidenceActivity::class.java)
+                startActivity(intent)
+            } else if (quizPage.toString() == "비만 예방") {
+                intent = Intent(this, QuizOverActivity::class.java)
+                startActivity(intent)
+            } else if (quizPage.toString() == "두뇌 회전") {
+                intent = Intent(this, QuizBrainActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         viewPager_article = findViewById(R.id.vpArticle)
