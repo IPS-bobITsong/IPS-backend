@@ -114,7 +114,7 @@ class MyPageActivity : AppCompatActivity() {
         }
 
         binding.gainPointBtn.setOnClickListener {
-            intent = Intent(this, GainPointActivity::class.java)
+            intent = Intent(this, GainPointListActivity::class.java)
             startActivity(intent)
         }
 

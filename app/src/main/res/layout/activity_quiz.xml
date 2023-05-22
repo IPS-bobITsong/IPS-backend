@@ -137,10 +137,10 @@
 
             <RadioButton
                 android:id="@+id/answer1"
-                android:text="선지 1"
-                android:textSize="10pt"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="선지 1"
+                android:textSize="10pt" />
 
             <RadioButton
                 android:id="@+id/answer2"
@@ -156,9 +156,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+            <RadioButton
+                android:id="@+id/answer4"
+                android:text="선지 4"
+                android:textSize="10pt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
         </RadioGroup>
 
-        <ImageButton
+        <Button
             android:id="@+id/checkAnswerBtn"
             android:src="@drawable/checkanswerbtn"
             android:scaleType="fitXY"

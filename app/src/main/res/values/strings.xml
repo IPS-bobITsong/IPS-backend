@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">IPS2</string>
+    <string name="quiz">QUIZ</string>
+    <string name="submit">%s</string>
 </resources>
