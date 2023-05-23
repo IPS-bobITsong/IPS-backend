@@ -6,13 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.ListView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +18,7 @@ class SearchMenuActivity : AppCompatActivity() {
     var firestore : FirebaseFirestore? = null
 
     private lateinit var recyclerView1 : RecyclerView
-    private lateinit var recyclerView2 : RecyclerView
+//    private lateinit var recyclerView2 : RecyclerView
 
     private lateinit var recyclerViewAdapter1 : SearchMenuActivity.RecyclerViewAdapter1
     private lateinit var recyclerViewAdapter2 : SelectedRVAdapter
@@ -65,33 +61,34 @@ class SearchMenuActivity : AppCompatActivity() {
 
         // 취소 버튼 누르면 삭제
 
-        // 선택한 메뉴 정보 받아서
-        findViewById<ImageButton>(R.id.selectBtn).setOnClickListener {
-            intent = Intent(this, CompleteActivity::class.java)
-            startActivity(intent)
-        }
+//        // 선택한 메뉴 정보 받아서
+//        findViewById<ImageButton>(R.id.selectBtn).setOnClickListener {
+//            intent = Intent(this, CompleteActivity::class.java)
+//            startActivity(intent)
+//        }
 
         // 파이어스토어 인스턴스 초기화
         firestore = FirebaseFirestore.getInstance()
 
         // RecyclerViewAdapter 초기화
         recyclerView1 = findViewById(R.id.menuList)
-        recyclerView2 = findViewById(R.id.selectedMenuList)
-
         recyclerViewAdapter1 = RecyclerViewAdapter1()
-        recyclerViewAdapter2 = SelectedRVAdapter(ArrayList<SelectedData>())
         recyclerView1.adapter = recyclerViewAdapter1
-        recyclerView2.adapter = recyclerViewAdapter2
         recyclerView1.layoutManager = LinearLayoutManager(this)
-        recyclerView2.layoutManager = LinearLayoutManager(this)
+
+//        recyclerView2 = findViewById(R.id.selectedMenuList)
+//        recyclerViewAdapter2 = SelectedRVAdapter(ArrayList<SelectedData>())
+//        recyclerView2.adapter = recyclerViewAdapter2
+//        recyclerView2.layoutManager = LinearLayoutManager(this)
 
 
-        recyclerViewAdapter2.itemCancel = object : SelectedRVAdapter.ItemCancel {
-            override fun onClick(view : ImageButton, position: Int) {
-                // 'X' 버튼 누르면 선택 목록에서 사라지도록 구현해야 함
-            }
-
-        }
+//
+//        recyclerViewAdapter2.itemCancel = object : SelectedRVAdapter.ItemCancel {
+//            override fun onClick(view : ImageButton, position: Int) {
+//                // 'X' 버튼 누르면 선택 목록에서 사라지도록 구현해야 함
+//            }
+//
+//        }
 
 //        // RecyclerView 초기화
 //        recyclerView = findViewById(R.id.menuList)
@@ -317,16 +314,16 @@ class SearchMenuActivity : AppCompatActivity() {
         }
 
         // 선택된 메뉴 반환
-        fun getSelectedMenus(): List<MenuBook> {
-            val selectedMenus = ArrayList<MenuBook>()
+        fun getSelectedMenu(): List<MenuBook> {
+            val selectedMenu = ArrayList<MenuBook>()
 
             for (menu in menuDataList) {
                 if (menu.isSelected) {
-                    selectedMenus.add(menu)
+                    selectedMenu.add(menu)
                 }
             }
 
-            return selectedMenus
+            return selectedMenu
         }
 
         // 메뉴 데이터 설정 및 초기화
