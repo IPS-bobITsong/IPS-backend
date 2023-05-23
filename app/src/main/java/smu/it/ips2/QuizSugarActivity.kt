@@ -9,7 +9,7 @@ import android.widget.RadioButton
 class QuizSugarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quiz_sodium)
+        setContentView(R.layout.activity_quiz_sugars)
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
             intent = Intent(this, GainPointActivity::class.java)

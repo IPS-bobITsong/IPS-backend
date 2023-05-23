@@ -59,7 +59,7 @@
             android:exported="false" />
         <activity
             android:name=".QuizCarboActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".QuizConfidenceActivity"
             android:exported="false" />
