@@ -2,14 +2,13 @@ package smu.it.ips2
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
@@ -95,7 +94,7 @@ class JoinActivity : AppCompatActivity() {
        var femaleRadioButton = binding.female
        var sex = String()
        var point: String = "0"
-       var level: String = "1"
+       var level: String = "0"
 
        //성별 라디오버튼 체크 받아오기
        if (maleRadioButton.isChecked) {
