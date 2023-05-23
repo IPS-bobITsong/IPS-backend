@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout2">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -101,48 +101,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New! "
-                android:textColor="#FF3D3D"
-                android:textSize="10pt"
-                android:textStyle="bold" />
-
-            <!-- 입력한 메뉴 받아오기 -->
-            <TextView
-                android:id="@+id/selectedMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="'메뉴' "
-                android:textSize="10pt"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="추가"
-                android:textSize="10pt"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <!-- 영양성분 그래프 받아오기 -->
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:src="@drawable/piechart" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:background="@color/white"
-            android:padding="20dp">
+            android:padding="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -169,30 +129,238 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp">
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp">
 
-            <ImageButton
-                android:id="@+id/detailBtn"
-                android:src="@drawable/detailbtn"
-                android:scaleType="fitXY"
-                android:background="@android:color/transparent"
-                android:layout_width="220dp"
-                android:layout_height="55dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New! "
+                android:textColor="#FF3D3D"
+                android:textSize="12pt"
+                android:textStyle="bold" />
 
-            <ImageButton
-                android:id="@+id/okBtn"
-                android:src="@drawable/checkbtn"
-                android:scaleType="fitXY"
-                android:background="@android:color/transparent"
-                android:layout_width="110dp"
-                android:layout_height="55dp"
-                android:layout_marginLeft="20dp" />
+            <!-- 입력한 메뉴 받아오기 -->
+            <TextView
+                android:id="@+id/selectedMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="'메뉴' "
+                android:textSize="12pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="의 영양성분"
+                android:textSize="12pt"
+                android:textStyle="bold" />
 
         </LinearLayout>
+
+        <!-- 영양성분 받아오기 -->
+        <LinearLayout
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/box_border"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="탄수화물: "
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/carbohydrate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="()"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" g"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="단백질: "
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/protein"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="()"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" g"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="지방: "
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/fat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="()"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" g"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="당류: "
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/sugars"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="()"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" g"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="나트륨: "
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/natrium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="()"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" mg"
+                    android:textSize="10pt"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:id="@+id/nutrient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(영양성분)"
+                android:textColor="#FF3D3D"
+                android:textSize="12pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="의 섭취량이 "
+                android:textSize="12pt"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/moreOrLess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="과다해요!"
+                android:textSize="12pt"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/nextBtn"
+            android:layout_width="110dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/nextbtn" />
 
     </LinearLayout>
 
