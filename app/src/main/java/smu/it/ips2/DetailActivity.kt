@@ -25,6 +25,7 @@ class DetailActivity : AppCompatActivity() {
         } else if (noticeMessage == "과다해요!") {
             findViewById<TextView>(R.id.moreOrLess).text = "줄여보세요!"
             findViewById<TextView>(R.id.textViewNotice).text = "함량이 적은 메뉴 둘러보기"
+        }
 
 
             findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
