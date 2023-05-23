@@ -140,7 +140,6 @@
         <!-- 선택한 메뉴 정보 받아오기 -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/selectedMenuList"
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -150,7 +149,7 @@
             android:src="@drawable/selectbtn"
             android:scaleType="fitXY"
             android:background="@android:color/transparent"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="end"
             android:layout_width="150dp"
             android:layout_height="50dp"/>
