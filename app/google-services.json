@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "460113897860-u9cedu3ue2fsg6lnqu0cq1c0br2npsih.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "smu.it.ips2",
+            "certificate_hash": "89ec5f64776b401db05d24ea29da6a482b963fe7"
+          }
+        },
+        {
           "client_id": "460113897860-9vmmtkv0v76s16u31e6aod3s130dpbsa.apps.googleusercontent.com",
           "client_type": 3
         }
