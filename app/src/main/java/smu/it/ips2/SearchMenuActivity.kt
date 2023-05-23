@@ -310,8 +310,8 @@ class SearchMenuActivity : AppCompatActivity() {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
                         val menu = menuDataList[position]
+                        menu.isSelected = true
                         Log.d("size", menu.toString())
-
                         val intent = Intent(view.context, CompleteActivity::class.java)
                         intent.putExtra("resname", menu.foodname)
                         view.context.startActivity(intent)
