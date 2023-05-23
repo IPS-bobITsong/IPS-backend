@@ -12,10 +12,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SearchMenuActivity : AppCompatActivity() {
-    var firestore : FirebaseFirestore? = null
+    private lateinit var firestore: FirebaseFirestore
     private val selectedMenu = mutableListOf<MenuBook>()
 
     private lateinit var recyclerView : RecyclerView
@@ -115,6 +116,7 @@ class SearchMenuActivity : AppCompatActivity() {
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val foodname: TextView = view.findViewById(R.id.foodName)
 
+            private var auth: FirebaseAuth = FirebaseAuth.getInstance()
             init {
                 view.setOnClickListener {
                     val position = adapterPosition
@@ -125,6 +127,23 @@ class SearchMenuActivity : AppCompatActivity() {
                         val intent = Intent(view.context, CompleteActivity::class.java)
                         intent.putExtra("resname", menu.foodname)
                         view.context.startActivity(intent)
+
+
+                        val currentUser = auth.currentUser
+                        val userId = currentUser?.uid
+                        // 파이어스토어 인스턴스 초기화
+                        firestore = FirebaseFirestore.getInstance()
+
+                        // 사용자별 컬렉션에 데이터 저장
+                        firestore.collection("users").document(userId.toString())
+                            .collection("menubook")
+                            .add(menu)
+                            .addOnSuccessListener { documentReference ->
+                                Log.d("SearchMenuActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w("SearchMenuActivity", "Error adding document", e)
+                            }
                     }
                 }
             }
