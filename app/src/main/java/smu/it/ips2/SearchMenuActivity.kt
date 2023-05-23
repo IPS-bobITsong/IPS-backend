@@ -16,11 +16,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class SearchMenuActivity : AppCompatActivity() {
     var firestore : FirebaseFirestore? = null
+    private val selectedMenu = mutableListOf<MenuBook>()
 
-    private lateinit var recyclerView1 : RecyclerView
+    private lateinit var recyclerView : RecyclerView
 //    private lateinit var recyclerView2 : RecyclerView
 
-    private lateinit var recyclerViewAdapter1 : SearchMenuActivity.RecyclerViewAdapter1
+    private lateinit var recyclerViewAdapter : SearchMenuActivity.RecyclerViewAdapter
     private lateinit var recyclerViewAdapter2 : SelectedRVAdapter
 
     private lateinit var searchQuery: String
@@ -54,27 +55,33 @@ class SearchMenuActivity : AppCompatActivity() {
             searchQuery = searchEditText.text.toString()
 
             // 검색어를 사용하여 RecyclerViewAdapter의 filter 메소드 호출
-            recyclerViewAdapter1.filter(searchQuery)
+            recyclerViewAdapter.filter(searchQuery)
         }
 
         // 메뉴 선택하면 장바구니에 담기도록
 
         // 취소 버튼 누르면 삭제
 
-//        // 선택한 메뉴 정보 받아서
+        // 선택한 메뉴 정보 받아서
 //        findViewById<ImageButton>(R.id.selectBtn).setOnClickListener {
-//            intent = Intent(this, CompleteActivity::class.java)
-//            startActivity(intent)
+////            intent = Intent(this, CompleteActivity::class.java)
+////            startActivity(intent)
+//            val selectedMenu = recyclerViewAdapter.getSelectedMenu().firstOrNull()
+//
+//            if (selectedMenu != null) {
+//                val intent = Intent(this, CompleteActivity::class.java)
+//                intent.putExtra("selectedMenu", selectedMenu)
+//                startActivity(intent)
+//            }
 //        }
 
         // 파이어스토어 인스턴스 초기화
         firestore = FirebaseFirestore.getInstance()
-
         // RecyclerViewAdapter 초기화
-        recyclerView1 = findViewById(R.id.menuList)
-        recyclerViewAdapter1 = RecyclerViewAdapter1()
-        recyclerView1.adapter = recyclerViewAdapter1
-        recyclerView1.layoutManager = LinearLayoutManager(this)
+        recyclerView = findViewById(R.id.menuList)
+        recyclerViewAdapter = RecyclerViewAdapter()
+        recyclerView.adapter = recyclerViewAdapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
 //        recyclerView2 = findViewById(R.id.selectedMenuList)
 //        recyclerViewAdapter2 = SelectedRVAdapter(ArrayList<SelectedData>())
@@ -101,6 +108,8 @@ class SearchMenuActivity : AppCompatActivity() {
 
 //        // 메뉴를 가져와서 어댑터에 설정
 //        fetchMenuData(resname)
+
+
     }
 
 //    private fun fetchMenuData(resname: String?) {
@@ -175,7 +184,7 @@ class SearchMenuActivity : AppCompatActivity() {
 
 
 
-    inner class RecyclerViewAdapter1 : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    inner class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 //        var foodBook: ArrayList<MenuBook> = arrayListOf()
         private var menuDataList: ArrayList<MenuBook> = arrayListOf()
         private var filteredDataList: ArrayList<MenuBook> = arrayListOf()
@@ -242,11 +251,11 @@ class SearchMenuActivity : AppCompatActivity() {
 
             // 메뉴 선택 시 처리 로직 구현
             // 안됨
-            viewHolder.itemView.setOnClickListener {
-                if (!menu.isSelected) ArrayList<SelectedData>().add(SelectedData(menu.foodname!!))
-                menu.isSelected = true
-                notifyDataSetChanged()
-            }
+//            viewHolder.itemView.setOnClickListener {
+//                if (!menu.isSelected) ArrayList<SelectedData>().add(SelectedData(menu.foodname!!))
+//                menu.isSelected = true
+//                notifyDataSetChanged(
+//            }
 //
 //            // 선택한 메뉴 표시 여부 설정
 //            if (menu.isSelected) {
@@ -258,7 +267,61 @@ class SearchMenuActivity : AppCompatActivity() {
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val foodname: TextView = view.findViewById(R.id.foodName)
+            var selectedMenu: MenuBook? = null
 //            val checkIcon: ImageView = view.findViewById(R.id.checkIcon)
+
+            // ver2.
+//            init {
+//                view.setOnClickListener {
+//                    val position = adapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        val menu = menuDataList[position]
+//                        menu.isSelected = !menu.isSelected
+////                        selectedMenu = if (menu.isSelected) menu else null
+////                        notifyDataSetChanged()
+//                        val intent = Intent(view.context, CompleteActivity::class.java)
+//                        intent.putExtra("resname", menu.foodname)
+//                        view.context.startActivity(intent)
+//                    }
+//                }
+//            }
+//
+//            init {
+//                view.setOnClickListener {
+//                    val position = adapterPosition
+//                    if (position != RecyclerView.NO_POSITION) {
+//                        val menu = menuDataList[position]
+//                        menu.isSelected = !menu.isSelected
+//
+//                        // 선택한 메뉴 정보를 CompleteActivity로 전달하는 코드 추가
+//                        if (menu.isSelected) {
+//                            val intent = Intent(view.context, CompleteActivity::class.java)
+//                            intent.putExtra("selectedMenu", menu.foodname)
+//                            view.context.startActivity(intent)
+//                        }
+//
+//                        notifyDataSetChanged()
+//                    }
+//                }
+//            }
+
+            init {
+                view.setOnClickListener {
+                    val position = adapterPosition
+                    if (position != RecyclerView.NO_POSITION) {
+                        val menu = menuDataList[position]
+                        Log.d("size", menu.toString())
+
+                        val intent = Intent(view.context, CompleteActivity::class.java)
+                        intent.putExtra("resname", menu.foodname)
+                        view.context.startActivity(intent)
+                    }
+                }
+            }
+
+
+
+
 
 //            // 메뉴 선택하면 selectedMenuList(RecyclerView)에 뜨도록 구현해야 함
 //            init {
