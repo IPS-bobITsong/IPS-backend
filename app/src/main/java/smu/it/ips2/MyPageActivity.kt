@@ -1,14 +1,16 @@
 package smu.it.ips2
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 import smu.it.ips2.databinding.ActivityMyPageBinding
 
 class MyPageActivity : AppCompatActivity() {
@@ -16,6 +18,8 @@ class MyPageActivity : AppCompatActivity() {
     private lateinit var database: FirebaseDatabase
     private lateinit var binding : ActivityMyPageBinding
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var firestore: FirebaseFirestore
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -39,13 +43,25 @@ class MyPageActivity : AppCompatActivity() {
 
                 }
             })
-            database.getReference("users").child(userId).child("age").addListenerForSingleValueEvent(object : ValueEventListener {
+            val ageRef = database.getReference("users").child(userId).child("age")
+            ageRef.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val age = dataSnapshot.getValue(String::class.java)
                     // 사용자 나이 사용
                     if (age != null) {
                         runOnUiThread {
                             binding.age.text = age + "세"
+                        }
+                    } else {
+                        // age 값이 null인 경우 기본 값 "1"로 설정
+                        runOnUiThread {
+                            ageRef.setValue("1")
+                                .addOnSuccessListener {
+                                    Log.d("MyPageActivity", "Age updated to 1")
+                                }
+                                .addOnFailureListener { e ->
+                                    Log.e("MyPageActivity", "Error updating age: ", e)
+                                }
                         }
                     }
                 }
@@ -79,7 +95,8 @@ class MyPageActivity : AppCompatActivity() {
 
                 }
             })
-            database.getReference("users").child(userId).child("level").addListenerForSingleValueEvent(object : ValueEventListener {
+            var level = database.getReference("users").child(userId).child("level")
+            level.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val level = dataSnapshot.getValue(String::class.java)
                     if (level != null) {
@@ -92,7 +109,91 @@ class MyPageActivity : AppCompatActivity() {
 
                 }
             })
+            level.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val level = dataSnapshot.getValue(String::class.java)
+                    val levelIcon = when (level) {
+                        "1" -> R.drawable.level1
+                        "2" -> R.drawable.level2
+                        "3" -> R.drawable.level3
+                        "4" -> R.drawable.level4
+                        "5" -> R.drawable.level5
+                        else -> R.drawable.level1 // 기본 이미지
+                    }
+                    binding.levelicon.setImageResource(levelIcon)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // 에러 처리
+                }
+            })
+
         }
+        // 건강 레벨 식단 개수에 따라 변환
+        firestore = FirebaseFirestore.getInstance()
+
+        firestore.collection("users").document(userId.toString())
+            .collection("menubook")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val menuBookCount = querySnapshot.size()
+                Log.d("SearchMenuActivity", "MenuBook Count: $menuBookCount")
+                val levelRef = database.getReference("users").child(userId.toString()).child("level")
+                when {
+                    menuBookCount >= 15 -> {
+                        levelRef.setValue("5")
+                            .addOnSuccessListener {
+                                Log.d("SearchMenuActivity", "Health Level updated to 5")
+                                levelRef.setValue("5")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("SearchMenuActivity", "Error updating level: ", e)
+                            }
+                    }
+                    menuBookCount >= 12 -> {
+                        levelRef.setValue("4")
+                            .addOnSuccessListener {
+                                Log.d("SearchMenuActivity", "Health Level updated to 4")
+                                levelRef.setValue("4")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("SearchMenuActivity", "Error updating level: ", e)
+                            }
+                    }
+                    menuBookCount >= 9 -> {
+                        levelRef.setValue("3")
+                            .addOnSuccessListener {
+                                Log.d("SearchMenuActivity", "Health Level updated to 3")
+                                levelRef.setValue("3")                            }
+                            .addOnFailureListener { e ->
+                                Log.e("SearchMenuActivity", "Error updating level: ", e)
+                            }
+                    }
+                    menuBookCount >= 6 -> {
+                        levelRef.setValue("2")
+                            .addOnSuccessListener {
+                                Log.d("SearchMenuActivity", "Health Level updated to 2")
+                                levelRef.setValue("2")                            }
+                            .addOnFailureListener { e ->
+                                Log.e("SearchMenuActivity", "Error updating level: ", e)
+                            }
+                    }
+                    menuBookCount >= 3 -> {
+                        levelRef.setValue("1")
+                            .addOnSuccessListener {
+                                Log.d("SearchMenuActivity", "Health Level updated to 1")
+                                levelRef.setValue("1")                            }
+                            .addOnFailureListener { e ->
+                                Log.e("SearchMenuActivity", "Error updating level: ", e)
+                            }
+                    }
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("SearchMenuActivity", "Error getting documents: ", e)
+            }
+
+
         // 이전 화면으로 이동
         binding.backBtn.setOnClickListener {
 
