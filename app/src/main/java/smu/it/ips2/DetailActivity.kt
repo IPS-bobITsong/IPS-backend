@@ -12,7 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class DetailActivity : AppCompatActivity() {
 
     lateinit var viewPager_card: ViewPager2
-    var firestore : FirebaseFirestore? = null
+    lateinit var firestore : FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,17 +32,32 @@ class DetailActivity : AppCompatActivity() {
         }
 
 
+        firestore = FirebaseFirestore.getInstance()
         //파이어스토어 메뉴명&영양성분 불러와서 리스트로 접근
         val menus = ArrayList<MenuList>()
-        firestore?.collection("restaurantBook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+//        firestore?.collection("restaurantBook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+//            // ArrayList 비워줌
+//            menus.clear()
+//
+//            for (snapshot in querySnapshot!!.documents) {
+//                var menuname = snapshot.getString("foodname")
+//                var carbo = snapshot.getDouble("carbo")
+//                var protein = snapshot.getDouble("protein")
+//                var fat = snapshot.getDouble("fat")
+//                val menu = MenuList(menuname, carbo, protein, fat)
+//                menus.add(menu)
+//            }
+//        }
+        firestore.collection("restaurantBook").get()
+            .addOnSuccessListener { result ->
             // ArrayList 비워줌
             menus.clear()
 
-            for (snapshot in querySnapshot!!.documents) {
-                var menuname = snapshot.getString("foodname")
-                var carbo = snapshot.getDouble("carbo")
-                var protein = snapshot.getDouble("protein")
-                var fat = snapshot.getDouble("fat")
+            for (document in result) {
+                var menuname = document["foodname"] as String
+                var carbo = document["carbo"] as Double
+                var protein = document["protein"]as Double
+                var fat = document["fat"]as Double
                 val menu = MenuList(menuname, carbo, protein, fat)
                 menus.add(menu)
             }
@@ -78,15 +93,6 @@ class DetailActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 해당 가맹점 링크
-        findViewById<ImageButton>(R.id.buttonRecommend1).setOnClickListener {
-
-        }
-
-        // 해당 가맹점 링크
-        findViewById<ImageButton>(R.id.buttonRecommend2).setOnClickListener {
-
-        }
 
         viewPager_card = findViewById(R.id.cardNews)
         viewPager_card.adapter = ViewPagerAdapter(getCardNews()) // 어댑터 생성

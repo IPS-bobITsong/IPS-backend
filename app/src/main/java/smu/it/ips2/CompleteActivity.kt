@@ -3,6 +3,7 @@ package smu.it.ips2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -11,14 +12,20 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 
 class CompleteActivity : AppCompatActivity() {
     private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    lateinit var firestore : FirebaseFirestore
 
-    var standard_carbohydrate: Float = 0.0f
-    var standard_protein: Float = 0.0f
-    var standard_fat: Float = 0.0f
+    var standard_carbohydrate: Double = 0.0
+    var standard_protein: Double = 0.0
+    var standard_fat: Double = 0.0
+
+    var u_carbohydrate: Double? = 0.0
+    var u_protein: Double? = 0.0
+    var u_fat: Double? = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,32 +39,32 @@ class CompleteActivity : AppCompatActivity() {
                 .addListenerForSingleValueEvent(object :
                     ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val age = dataSnapshot.getValue(Int::class.java)
+                        val age = dataSnapshot.getValue(String::class.java)?.toInt()
                         if (age != null) {
                             if (age in 1 until 3) {
-                                standard_carbohydrate = 43.33f
-                                standard_protein = 6.67f
-                                standard_fat = 11.67f
+                                standard_carbohydrate = 43.33
+                                standard_protein = 6.67
+                                standard_fat = 11.67
                             } else if (age in 3 until 6) {
-                                standard_carbohydrate = 43.33f
-                                standard_protein = 8.33f
-                                standard_fat = 11.67f
+                                standard_carbohydrate = 43.33
+                                standard_protein = 8.33
+                                standard_fat = 11.67
                             } else if (age in 6 until 9) {
-                                standard_carbohydrate = 43.33f
-                                standard_protein = 11.67f
-                                standard_fat = 13.33f
+                                standard_carbohydrate = 43.33
+                                standard_protein = 11.67
+                                standard_fat = 13.33
                             } else if (age in 9 until 12) {
-                                standard_carbohydrate = 43.33f
-                                standard_protein = 16.67f
-                                standard_fat = 16f
+                                standard_carbohydrate = 43.33
+                                standard_protein = 16.67
+                                standard_fat = 16.0
                             } else if (age in 12 until 15) {
-                                standard_carbohydrate = 43.33f
-                                standard_protein = 20f
-                                standard_fat = 18.33f
+                                standard_carbohydrate = 43.33
+                                standard_protein = 20.0
+                                standard_fat = 18.33
                             } else if (age in 15 until 19) {
-                                standard_carbohydrate = 43.33f
-                                standard_protein = 21.67f
-                                standard_fat = 23.33f
+                                standard_carbohydrate = 43.33
+                                standard_protein = 21.67
+                                standard_fat = 23.33
                             }
                         }
                     }
@@ -67,19 +74,38 @@ class CompleteActivity : AppCompatActivity() {
                 })
         }
 
+        // 파이어스토어 인스턴스 초기화
+        firestore = FirebaseFirestore.getInstance()
+        firestore.collection("users").document(userId.toString())
+            .collection("menubook")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val menuBookCount = querySnapshot.size()
+                if (!querySnapshot.isEmpty) {
+                    val documentSnapshot = querySnapshot.documents[menuBookCount-1]
+                    val menu = documentSnapshot.toObject(MenuBook::class.java)
+                    u_carbohydrate = menu?.carbo
+                    u_protein = menu?.protein
+                    u_fat = menu?.fat
+                }
+            }
+            .addOnFailureListener { e ->
+                Log.e("SearchMenuActivity", "Error getting documents: ", e)
+            }
+
         findViewById<TextView>(R.id.carbohydrate).text = u_carbohydrate.toString()
         findViewById<TextView>(R.id.protein).text = u_protein.toString()
         findViewById<TextView>(R.id.fat).text = u_fat.toString()
 
 
-        val r_carbohydrate: Float = standard_carbohydrate - u_carbohydrate
-        val r_protein: Float = standard_protein - u_protein
-        val r_fat: Float = standard_fat - u_fat
+        val r_carbohydrate: Double? = standard_carbohydrate - u_carbohydrate!!
+        val r_protein: Double? = standard_protein - u_protein!!
+        val r_fat: Double? = standard_fat - u_fat!!
 
         //기준-영양소 계산 후 절댓값 씌우기
-        val a_carbohydrate = Math.abs(r_carbohydrate)
-        val a_protein = Math.abs(r_protein)
-        val a_fat = Math.abs(r_fat)
+        val a_carbohydrate = Math.abs(r_carbohydrate!!)
+        val a_protein = Math.abs(r_protein!!)
+        val a_fat = Math.abs(r_fat!!)
 
         //절댓값 가장 큰 영양소 나타내기
         val noticeNutrient = compare(a_carbohydrate, a_protein, a_fat)
@@ -96,7 +122,7 @@ class CompleteActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
-            intent = Intent(this, SearchMenuActivity::class.java)
+            intent = Intent(this, SearchRestaurantActivity::class.java)
             startActivity(intent)
         }
 
@@ -150,7 +176,7 @@ class CompleteActivity : AppCompatActivity() {
     }
 
     //세가지 기준-영양 입력받고, 가장 절댓값이 큰 값 알아내기
-    fun compare(carbohydrate: Float, protein: Float, fat: Float): String {
+    fun compare(carbohydrate: Double, protein: Double, fat: Double): String {
         return when {
             carbohydrate > protein && carbohydrate > fat -> "탄수화물"
             protein > carbohydrate && protein > fat -> "단백질"
@@ -159,7 +185,7 @@ class CompleteActivity : AppCompatActivity() {
         }
     }
 
-    fun setText(result: Float): String{
+    fun setText(result: Double): String{
         return when {
             result > 0 -> "부족해요!"
             result < 0 -> "과다해요!"
