@@ -15,7 +15,7 @@ class SelectedRVAdapter(val items : ArrayList<SelectedData>) : RecyclerView.Adap
     var itemCancel : ItemCancel? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SelectedRVAdapter.ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.menu_item, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.seleted_item, parent, false)
         return ViewHolder(v)
     }
 

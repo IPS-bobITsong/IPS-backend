@@ -58,37 +58,20 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- 아이디 찾기, 비밀번호 찾기 버튼 포함 -->
+            <!-- 로그인 정보 기억하기 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="20dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/buttonFindID"
-                    android:layout_width="match_parent"
+                <RadioButton
+                    android:id="@+id/radioButton"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#00ff0000"
-                    android:text="ID 찾기"
-                    android:textColor="@color/black" />
-
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/black" />
-
-                <Button
-                    android:id="@+id/buttonFindPW"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#00ff0000"
-                    android:text="PW 찾기"
-                    android:textColor="@color/black" />
+                    android:layout_gravity="center"
+                    android:text="로그인 정보 기억하기" />
             </LinearLayout>
 
             <!-- 로그인하기, 회원가입 버튼 포함 -->
@@ -121,21 +104,6 @@
                     android:src="@drawable/joinbtn"
                     android:importantForAccessibility="no" />
 
-            </LinearLayout>
-
-            <!-- 로그인 정보 기억하기 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="로그인 정보 기억하기" />
             </LinearLayout>
 
         </LinearLayout>
