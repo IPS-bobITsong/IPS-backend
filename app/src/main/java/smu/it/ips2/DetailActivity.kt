@@ -18,6 +18,15 @@ class DetailActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.textViewNutrient).text = needNutrient
         findViewById<TextView>(R.id.textViewNoticeNutrient).text = needNutrient
 
+        val noticeMessage = intent.getStringExtra("needtext")
+        if (noticeMessage == "부족해요!") {
+            findViewById<TextView>(R.id.moreOrLess).text = "늘려보세요!"
+            findViewById<TextView>(R.id.textViewNotice).text = "함량이 많은 메뉴 둘러보기"
+        } else if (noticeMessage == "과다해요!") {
+            findViewById<TextView>(R.id.moreOrLess).text = "줄여보세요!"
+            findViewById<TextView>(R.id.textViewNotice).text = "함량이 적은 메뉴 둘러보기"
+
+
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
             intent = Intent(this, CompleteActivity::class.java)
             startActivity(intent)
