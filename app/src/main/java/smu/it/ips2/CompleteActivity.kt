@@ -66,27 +66,33 @@ class CompleteActivity : AppCompatActivity() {
                 })
         }
 
-        var r_carbohydrate: Float = standard_carbohydrate - u_carbohydrate
-        var r_protein: Float = standard_protein - u_protein
-        var r_fat: Float = standard_fat - u_fat
+        findViewById<TextView>(R.id.carbohydrate).text = u_carbohydrate.toString()
+        findViewById<TextView>(R.id.protein).text = u_protein.toString()
+        findViewById<TextView>(R.id.fat).text = u_fat.toString()
+
+
+        val r_carbohydrate: Float = standard_carbohydrate - u_carbohydrate
+        val r_protein: Float = standard_protein - u_protein
+        val r_fat: Float = standard_fat - u_fat
 
         //기준-영양소 계산 후 절댓값 씌우기
-        var a_carbohydrate = Math.abs(r_carbohydrate)
-        var a_protein = Math.abs(r_protein)
-        var a_fat = Math.abs(r_fat)
+        val a_carbohydrate = Math.abs(r_carbohydrate)
+        val a_protein = Math.abs(r_protein)
+        val a_fat = Math.abs(r_fat)
 
         //절댓값 가장 큰 영양소 나타내기
-        findViewById<TextView>(R.id.nutrient).text = compare(a_carbohydrate, a_protein, a_fat)
+        val noticeNutrient = compare(a_carbohydrate, a_protein, a_fat)
+        findViewById<TextView>(R.id.nutrient).text = noticeNutrient
 
         //과다/부족 글자 나타내기
+        val needText = findViewById<TextView>(R.id.moreOrLess)
         if(a_carbohydrate > a_protein && a_carbohydrate > a_fat) {
-            findViewById<TextView>(R.id.moreOrLess).text = setText(r_carbohydrate)
+            needText.text = setText(r_carbohydrate)
         } else if(a_protein > a_carbohydrate && a_protein > a_fat) {
-            findViewById<TextView>(R.id.moreOrLess).text = setText(r_protein)
+            needText.text = setText(r_protein)
         } else if(a_fat > a_carbohydrate && a_fat > a_protein) {
-            findViewById<TextView>(R.id.moreOrLess).text = setText(r_fat)
+            needText.text = setText(r_fat)
         }
-
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
             intent = Intent(this, SearchMenuActivity::class.java)
@@ -105,6 +111,8 @@ class CompleteActivity : AppCompatActivity() {
 
         findViewById<ImageButton>(R.id.nextBtn).setOnClickListener {
             intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("nutrient", noticeNutrient)
+            intent.putExtra("needtext", needText.text)
             startActivity(intent)
         }
     }

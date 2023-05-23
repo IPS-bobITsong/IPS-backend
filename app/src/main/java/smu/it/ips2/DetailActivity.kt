@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 
 class DetailActivity : AppCompatActivity() {
@@ -12,6 +13,10 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+
+        val needNutrient = intent.getStringExtra("nutrient")
+        findViewById<TextView>(R.id.textViewNutrient).text = needNutrient
+        findViewById<TextView>(R.id.textViewNoticeNutrient).text = needNutrient
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
             intent = Intent(this, CompleteActivity::class.java)
