@@ -1,5 +1,6 @@
 package smu.it.ips2
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -26,6 +27,10 @@ class GainPointActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.quizBtn).setOnClickListener {
+
+            intent = Intent(this, GainPointListActivity::class.java)
+            setResult(Activity.RESULT_OK, intent)
+
             if (quizPage.toString() == "탄수화물") {
                 intent = Intent(this, QuizCarboActivity::class.java)
                 startActivity(intent)

@@ -124,17 +124,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
-            <ImageButton
-                android:id="@+id/articleBtn"
-                android:layout_width="200dp"
-                android:layout_height="55dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY"
-                android:src="@drawable/articlebtn" />
-
             <ImageButton
                 android:id="@+id/okBtn"
                 android:layout_width="110dp"

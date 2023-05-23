@@ -16,11 +16,6 @@ class WrongActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        findViewById<ImageButton>(R.id.articleBtn).setOnClickListener {
-            intent = Intent(this, GainPointActivity::class.java)
-            startActivity(intent)
-        }
-
         findViewById<ImageButton>(R.id.okBtn).setOnClickListener {
             intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
