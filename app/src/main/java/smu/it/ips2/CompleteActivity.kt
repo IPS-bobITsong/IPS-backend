@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -115,6 +116,37 @@ class CompleteActivity : AppCompatActivity() {
             intent.putExtra("needtext", needText.text)
             startActivity(intent)
         }
+
+        val database = FirebaseDatabase.getInstance()
+
+        val ref = database.getReference("users").child(userId.toString()).child("point")
+
+        // 데이터 읽기
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val currentValue = dataSnapshot.getValue(String::class.java) // 현재 값 가져오기
+
+                // 현재 값에서 변화시킬 작업 수행
+                val newValue = (currentValue?.toIntOrNull() ?: 0) + 30 // 현재 값에 30 추가
+
+                // 데이터 수정
+                ref.setValue(newValue.toString())
+                    .addOnSuccessListener {
+                        // 수정 성공
+                        Toast.makeText(this@CompleteActivity, "포인트를 획득했습니다!", Toast.LENGTH_SHORT).show()
+                        // 원하는 작업 수행 or 메시지 표시 가능
+                    }
+                    .addOnFailureListener { exception ->
+                        // 수정 실패
+                        // 오류 처리 수행 or 메시지 표시 가능
+                    }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // 읽기 실패 처리
+                // 오류 처리 수행 or 메시지 표시 가능
+            }
+        })
     }
 
     //세가지 기준-영양 입력받고, 가장 절댓값이 큰 값 알아내기
