@@ -49,12 +49,15 @@ class JoinActivity : AppCompatActivity() {
                 view: View?,
                 position: Int,
                 id: Long
-            ) { if (position > 0) {
-                age = parent?.getItemAtPosition(position).toString()
-            }
+            ) {
+                if (position > 0) {
+                    age = parent?.getItemAtPosition(position) as String
+                } else {
+                    age = "1"
+                }
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                age = "1"
             }
         }
 
