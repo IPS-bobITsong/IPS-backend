@@ -1,12 +1,12 @@
 package smu.it.ips2
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -81,22 +81,33 @@ class CompleteActivity : AppCompatActivity() {
             .get()
             .addOnSuccessListener { querySnapshot ->
                 val menuBookCount = querySnapshot.size()
+                Log.d("SearchMenuActivity", "MenuBook Count: $menuBookCount")
                 if (!querySnapshot.isEmpty) {
                     val documentSnapshot = querySnapshot.documents[menuBookCount-1]
                     val menu = documentSnapshot.toObject(MenuBook::class.java)
+                    val u_menuName = menu?.foodname
                     u_carbohydrate = menu?.carbo
                     u_protein = menu?.protein
                     u_fat = menu?.fat
+                    val u_sugars = menu?.sugars
+                    val u_sodium = menu?.sodium
+
+//                    findViewById<TextView>(R.id.foodName).text = u_menuName.toString()
+                    findViewById<TextView>(R.id.carbohydrate).text = u_carbohydrate.toString()
+                    findViewById<TextView>(R.id.protein).text = u_protein.toString()
+                    findViewById<TextView>(R.id.fat).text = u_fat.toString()
+//                    findViewById<TextView>(R.id.protein).text = u_sugars.toString()
+//                    findViewById<TextView>(R.id.sodium).text = u_sodium.toString()
                 }
             }
             .addOnFailureListener { e ->
                 Log.e("SearchMenuActivity", "Error getting documents: ", e)
             }
 
-        findViewById<TextView>(R.id.carbohydrate).text = u_carbohydrate.toString()
-        findViewById<TextView>(R.id.protein).text = u_protein.toString()
-        findViewById<TextView>(R.id.fat).text = u_fat.toString()
 
+        Log.d("SearchMenuActivity", "carbo: $u_carbohydrate")
+        Log.d("SearchMenuActivity", "protein: $u_protein")
+        Log.d("SearchMenuActivity", "fat: $u_fat")
 
         val r_carbohydrate: Double? = standard_carbohydrate - u_carbohydrate!!
         val r_protein: Double? = standard_protein - u_protein!!
