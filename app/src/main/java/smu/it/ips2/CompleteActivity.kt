@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -59,42 +60,71 @@ class CompleteActivity : AppCompatActivity() {
                             }
                         }
                     }
-                    override fun onCancelled(databaseError: DatabaseError) {
 
+                    override fun onCancelled(databaseError: DatabaseError) {
                     }
                 })
-
-            findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
-                intent = Intent(this, SearchMenuActivity::class.java)
-                startActivity(intent)
-            }
-
-            findViewById<ImageButton>(R.id.mypageBtn).setOnClickListener {
-                intent = Intent(this, MyPageActivity::class.java)
-                startActivity(intent)
-            }
-
-            findViewById<ImageButton>(R.id.homeBtn).setOnClickListener {
-                intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
-
-            findViewById<ImageButton>(R.id.okBtn).setOnClickListener {
-                intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
         }
-        fun Calculate(standard: Int, eating: Int): String {
-            val needs = standard - eating
-            var u_text = String()
-            if (needs > 0) {
-                u_text = "부족해요!"
-            } else if (needs == 0) {
-                u_text = "적당해요"
-            } else if (needs < 0) {
-                u_text = "과다해요!"
-            }
-            return u_text
+
+        var r_carbohydrate: Float = standard_carbohydrate - u_carbohydrate
+        var r_protein: Float = standard_protein - u_protein
+        var r_fat: Float = standard_fat - u_fat
+
+        //기준-영양소 계산 후 절댓값 씌우기
+        var a_carbohydrate = Math.abs(r_carbohydrate)
+        var a_protein = Math.abs(r_protein)
+        var a_fat = Math.abs(r_fat)
+
+        //절댓값 가장 큰 영양소 나타내기
+        findViewById<TextView>(R.id.nutrient).text = compare(a_carbohydrate, a_protein, a_fat)
+
+        //과다/부족 글자 나타내기
+        if(a_carbohydrate > a_protein && a_carbohydrate > a_fat) {
+            findViewById<TextView>(R.id.moreOrLess).text = setText(r_carbohydrate)
+        } else if(a_protein > a_carbohydrate && a_protein > a_fat) {
+            findViewById<TextView>(R.id.moreOrLess).text = setText(r_protein)
+        } else if(a_fat > a_carbohydrate && a_fat > a_protein) {
+            findViewById<TextView>(R.id.moreOrLess).text = setText(r_fat)
+        }
+
+
+        findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
+            intent = Intent(this, SearchMenuActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<ImageButton>(R.id.mypageBtn).setOnClickListener {
+            intent = Intent(this, MyPageActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<ImageButton>(R.id.homeBtn).setOnClickListener {
+            intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<ImageButton>(R.id.nextBtn).setOnClickListener {
+            intent = Intent(this, DetailActivity::class.java)
+            startActivity(intent)
         }
     }
+
+    //세가지 기준-영양 입력받고, 가장 절댓값이 큰 값 알아내기
+    fun compare(carbohydrate: Float, protein: Float, fat: Float): String {
+        return when {
+            carbohydrate > protein && carbohydrate > fat -> "탄수화물"
+            protein > carbohydrate && protein > fat -> "단백질"
+            fat > carbohydrate && fat > protein -> "지방"
+            else -> ""
+        }
+    }
+
+    fun setText(result: Float): String{
+        return when {
+            result > 0 -> "부족해요!"
+            result < 0 -> "과다해요!"
+            else -> ""
+        }
+    }
+
 }
