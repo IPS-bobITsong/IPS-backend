@@ -3,6 +3,7 @@ package smu.it.ips2
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -82,10 +83,33 @@ class MyPageActivity : AppCompatActivity() {
             database.getReference("users").child(userId).child("level").addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val level = dataSnapshot.getValue(String::class.java)
-                    if (level != null) {
+                    if (level == "1") {
                         runOnUiThread {
                             binding.level.text = level
+                            findViewById<ImageView>(R.id.levelicon).setImageResource(R.drawable.level1)
                         }
+                    } else if (level == "2") {
+                        runOnUiThread {
+                            binding.level.text = level
+                            findViewById<ImageView>(R.id.levelicon).setImageResource(R.drawable.level2)
+                        }
+                    } else if (level == "3") {
+                        runOnUiThread {
+                            binding.level.text = level
+                            findViewById<ImageView>(R.id.levelicon).setImageResource(R.drawable.level3)
+                        }
+                    } else if (level == "4") {
+                        runOnUiThread {
+                            binding.level.text = level
+                            findViewById<ImageView>(R.id.levelicon).setImageResource(R.drawable.level4)
+                        }
+                    } else if (level == "5") {
+                        runOnUiThread {
+                            binding.level.text = level
+                            findViewById<ImageView>(R.id.levelicon).setImageResource(R.drawable.level5)
+                        }
+                    } else {
+                        binding.level.text = level
                     }
                 }
                 override fun onCancelled(databaseError: DatabaseError) {

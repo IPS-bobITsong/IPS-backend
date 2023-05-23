@@ -18,6 +18,7 @@ class CompleteActivity : AppCompatActivity() {
     private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     lateinit var firestore : FirebaseFirestore
+    private var ENTER_DIET = 0
 
     var standard_carbohydrate: Double = 0.0
     var standard_protein: Double = 0.0
@@ -30,6 +31,8 @@ class CompleteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete)
+
+        ENTER_DIET += 1
 
         //사용자 나이에 따라 기준 영양소 세팅
         val currentUser = auth.currentUser
@@ -82,7 +85,7 @@ class CompleteActivity : AppCompatActivity() {
             .addOnSuccessListener { querySnapshot ->
                 val menuBookCount = querySnapshot.size()
                 if (!querySnapshot.isEmpty) {
-                    val documentSnapshot = querySnapshot.documents[menuBookCount-1]
+                    val documentSnapshot = querySnapshot.documents[menuBookCount - 1]
                     val menu = documentSnapshot.toObject(MenuBook::class.java)
                     u_carbohydrate = menu?.carbo
                     u_protein = menu?.protein
@@ -113,11 +116,11 @@ class CompleteActivity : AppCompatActivity() {
 
         //과다/부족 글자 나타내기
         val needText = findViewById<TextView>(R.id.moreOrLess)
-        if(a_carbohydrate > a_protein && a_carbohydrate > a_fat) {
+        if (a_carbohydrate > a_protein && a_carbohydrate > a_fat) {
             needText.text = setText(r_carbohydrate)
-        } else if(a_protein > a_carbohydrate && a_protein > a_fat) {
+        } else if (a_protein > a_carbohydrate && a_protein > a_fat) {
             needText.text = setText(r_protein)
-        } else if(a_fat > a_carbohydrate && a_fat > a_protein) {
+        } else if (a_fat > a_carbohydrate && a_fat > a_protein) {
             needText.text = setText(r_fat)
         }
 
@@ -146,7 +149,6 @@ class CompleteActivity : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
 
         val ref = database.getReference("users").child(userId.toString()).child("point")
-
         // 데이터 읽기
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -159,7 +161,8 @@ class CompleteActivity : AppCompatActivity() {
                 ref.setValue(newValue.toString())
                     .addOnSuccessListener {
                         // 수정 성공
-                        Toast.makeText(this@CompleteActivity, "포인트를 획득했습니다!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@CompleteActivity, "포인트를 획득했습니다!", Toast.LENGTH_SHORT)
+                            .show()
                         // 원하는 작업 수행 or 메시지 표시 가능
                     }
                     .addOnFailureListener { exception ->
@@ -173,7 +176,43 @@ class CompleteActivity : AppCompatActivity() {
                 // 오류 처리 수행 or 메시지 표시 가능
             }
         })
+
+
+        val lev = database.getReference("users").child(userId.toString()).child("level")
+        lev.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val currentValue = dataSnapshot.getValue(String::class.java) // 현재 값 가져오기
+                for (i in 1 until 6) {
+                    if (ENTER_DIET == 15 || ENTER_DIET == 30 || ENTER_DIET == 45 || ENTER_DIET == 60 || ENTER_DIET == 75) {
+
+                        // 현재 값에서 변화시킬 작업 수행
+                        val newValue = (currentValue?.toIntOrNull() ?: 0) + 1
+
+                        // 데이터 수정
+                        lev.setValue(newValue.toString())
+                            .addOnSuccessListener {
+                                // 수정 성공
+                                Toast.makeText(
+                                    this@CompleteActivity,
+                                    "레벨이 증가되었습니다!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                // 원하는 작업 수행 or 메시지 표시 가능
+                            }
+                            .addOnFailureListener { exception ->
+                                // 수정 실패
+                                // 오류 처리 수행 or 메시지 표시 가능
+                            }
+                    }
+                }
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // 읽기 실패 처리
+                // 오류 처리 수행 or 메시지 표시 가능
+            }
+        })
     }
+
 
     //세가지 기준-영양 입력받고, 가장 절댓값이 큰 값 알아내기
     fun compare(carbohydrate: Double, protein: Double, fat: Double): String {
@@ -185,12 +224,12 @@ class CompleteActivity : AppCompatActivity() {
         }
     }
 
-    fun setText(result: Double): String{
+    fun setText(result: Double): String {
         return when {
             result > 0 -> "부족해요!"
             result < 0 -> "과다해요!"
             else -> ""
         }
     }
-
 }
+

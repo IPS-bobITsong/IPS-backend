@@ -35,29 +35,15 @@ class DetailActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         //파이어스토어 메뉴명&영양성분 불러와서 리스트로 접근
         val menus = ArrayList<MenuList>()
-//        firestore?.collection("restaurantBook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-//            // ArrayList 비워줌
-//            menus.clear()
-//
-//            for (snapshot in querySnapshot!!.documents) {
-//                var menuname = snapshot.getString("foodname")
-//                var carbo = snapshot.getDouble("carbo")
-//                var protein = snapshot.getDouble("protein")
-//                var fat = snapshot.getDouble("fat")
-//                val menu = MenuList(menuname, carbo, protein, fat)
-//                menus.add(menu)
-//            }
-//        }
-        firestore.collection("restaurantBook").get()
-            .addOnSuccessListener { result ->
+        firestore?.collection("restaurantBook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
             // ArrayList 비워줌
             menus.clear()
 
-            for (document in result) {
-                var menuname = document["foodname"] as String
-                var carbo = document["carbo"] as Double
-                var protein = document["protein"]as Double
-                var fat = document["fat"]as Double
+            for (snapshot in querySnapshot!!.documents) {
+                var menuname = snapshot.getString("foodname")
+                var carbo = snapshot.getDouble("carbo")
+                var protein = snapshot.getDouble("protein")
+                var fat = snapshot.getDouble("fat")
                 val menu = MenuList(menuname, carbo, protein, fat)
                 menus.add(menu)
             }
@@ -79,7 +65,7 @@ class DetailActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
-            intent = Intent(this, CompleteActivity::class.java)
+            intent = Intent(this, SearchRestaurantActivity::class.java)
             startActivity(intent)
         }
 
@@ -89,6 +75,10 @@ class DetailActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.homeBtn).setOnClickListener {
+            intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        findViewById<ImageButton>(R.id.checkBtn).setOnClickListener {
             intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
