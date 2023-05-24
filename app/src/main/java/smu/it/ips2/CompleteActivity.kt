@@ -160,37 +160,18 @@ class CompleteActivity : AppCompatActivity() {
         val a_sodium = Math.abs(r_sodium!!)
 
         //절댓값 가장 큰 영양소 나타내기
-        val arr:Array<Double> = arrayOf(a_carbohydrate, a_protein, a_fat, a_sugars, a_sodium)
-        val noticeNutrient = compare(arr)
+        val noticeNutrient = compare(a_carbohydrate, a_protein, a_fat, a_sugars, a_sodium)
         findViewById<TextView>(R.id.nutrient).text = noticeNutrient
-        // 과다/부족
-        var moreOrLess = findViewById<TextView>(R.id.moreOrLess)
-        if (noticeNutrient == "탄수화물") {
-            if (r_carbohydrate > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        } else if (noticeNutrient == "단백질") {
-            if (r_protein > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        } else if (noticeNutrient == "지방") {
-            if (r_fat > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        } else if (noticeNutrient == "당류") {
-            if (r_sugars > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        } else {
-            if (r_sodium > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        }
 
-//        //과다/부족 글자 나타내기
-//        val needText = findViewById<TextView>(R.id.moreOrLess)
-//        if(a_carbohydrate > a_protein && a_carbohydrate > a_fat) {
-//            needText.text = setText(r_carbohydrate)
-//        } else if(a_protein > a_carbohydrate && a_protein > a_fat) {
-//            needText.text = setText(r_protein)
-//        } else if(a_fat > a_carbohydrate && a_fat > a_protein) {
-//            needText.text = setText(r_fat)
-//        }
+        //과다/부족 글자 나타내기
+        when(compare(a_carbohydrate, a_protein, a_fat, a_sugars, a_sodium)){
+            "탄수화물" -> findViewById<TextView>(R.id.moreOrLess).text = setText(r_carbohydrate)
+            "단백질" -> findViewById<TextView>(R.id.moreOrLess).text = setText(r_protein)
+            "지방" -> findViewById<TextView>(R.id.moreOrLess).text = setText(r_fat)
+            "당" -> findViewById<TextView>(R.id.moreOrLess).text = setText(r_sugars)
+            "나트륨" -> findViewById<TextView>(R.id.moreOrLess).text = setText(r_sodium)
+        }
+        val needText = findViewById<TextView>(R.id.moreOrLess).text
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
             intent = Intent(this, SearchRestaurantActivity::class.java)
@@ -210,7 +191,7 @@ class CompleteActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.nextBtn).setOnClickListener {
             intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("nutrient", noticeNutrient)
-//            intent.putExtra("needtext", needText.text)
+            intent.putExtra("needtext", needText)
             startActivity(intent)
         }
 
@@ -247,24 +228,16 @@ class CompleteActivity : AppCompatActivity() {
     }
 
     //세가지 기준-영양 입력받고, 가장 절댓값이 큰 값 알아내기
-    fun compare(
-        array: Array<Double>
-    ): String {
-        var largest = array[0]
-        for (i in array) {
-            if (i > largest) largest = i
-        }
-        if (largest == array[0]) return "탄수화물"
-        else if (largest == array[1]) return "단백질"
-        else if (largest == array[2]) return "지방"
-        else if (largest == array[3]) return "당류"
-        else return "나트륨"
-//        return when {
-////            carbohydrate > protein && carbohydrate > fat &&  -> "탄수화물"
-////            protein > carbohydrate && protein > fat -> "단백질"
-////            fat > carbohydrate && fat > protein -> "지방"
-////            else -> ""
-//        }
+    fun compare(carbohydrate: Double, protein: Double, fat: Double, sugars: Double, sodium: Double): String {
+        val nutrientList = mutableListOf<Pair<String, Double>>()
+        nutrientList.add("탄수화물" to carbohydrate)
+        nutrientList.add("단백질" to protein)
+        nutrientList.add("지방" to fat)
+        nutrientList.add("당류" to sugars)
+        nutrientList.add("나트륨" to sodium)
+
+        val maxNutrient = nutrientList.maxByOrNull { it.second }
+        return maxNutrient?.first ?: ""
     }
 
     fun setText(result: Double): String{
