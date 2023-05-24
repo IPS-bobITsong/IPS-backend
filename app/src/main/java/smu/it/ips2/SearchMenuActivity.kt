@@ -130,25 +130,31 @@ class SearchMenuActivity : AppCompatActivity() {
                         menu.isSelected = true
                         Log.d("size", menu.toString())
                         val intent = Intent(view.context, CompleteActivity::class.java)
-                        intent.putExtra("resname", menu.foodname)
+                        intent.putExtra("foodname", menu.foodname)
+                        intent.putExtra("carbo", menu.carbo)
+                        intent.putExtra("protein", menu.protein)
+                        intent.putExtra("fat", menu.fat)
+                        intent.putExtra("sugars", menu.sugars)
+                        intent.putExtra("sodium", menu.sodium)
+                       // intent.putExtra("resname", menu.foodname)
                         view.context.startActivity(intent)
 
 
-                        val currentUser = auth.currentUser
-                        val userId = currentUser?.uid
-                        // 파이어스토어 인스턴스 초기화
-                        firestore = FirebaseFirestore.getInstance()
-
-                        // 사용자별 컬렉션에 데이터 저장
-                        firestore.collection("users").document(userId.toString())
-                            .collection("menubook")
-                            .add(menu)
-                            .addOnSuccessListener { documentReference ->
-                                Log.d("SearchMenuActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
-                            }
-                            .addOnFailureListener { e ->
-                                Log.w("SearchMenuActivity", "Error adding document", e)
-                            }
+//                        val currentUser = auth.currentUser
+//                        val userId = currentUser?.uid
+//                        // 파이어스토어 인스턴스 초기화
+//                        firestore = FirebaseFirestore.getInstance()
+//
+//                        // 사용자별 컬렉션에 데이터 저장
+//                        firestore.collection("users").document(userId.toString())
+//                            .collection("menubook")
+//                            .add(menu)
+//                            .addOnSuccessListener { documentReference ->
+//                                Log.d("SearchMenuActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
+//                            }
+//                            .addOnFailureListener { e ->
+//                                Log.w("SearchMenuActivity", "Error adding document", e)
+//                            }
                     }
                 }
             }

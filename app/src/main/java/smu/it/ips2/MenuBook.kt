@@ -1,14 +1,14 @@
 package smu.it.ips2
 
 data class MenuBook(
-    val carbo: Double? = null,
-    val cholesterol: Double? = null,
-    val fat: Double? = null,
-    val foodname: String? = null,
-    val protein: Double? = null,
-    val saturatedfat: Double? = null,
+    val carbo: Double? = 0.0,
+    val cholesterol: Double? = 0.0,
+    val fat: Double? = 0.0,
+    val foodname: String? = "",
+    val protein: Double? = 0.0,
+    val saturatedfat: Double? = 0.0,
     var isSelected: Boolean = false,
-    val sodium: Double? = null,
-    val sugars: Double? = null
+    val sodium: Double? = 0.0,
+    val sugars: Double? = 0.0
 )
 
