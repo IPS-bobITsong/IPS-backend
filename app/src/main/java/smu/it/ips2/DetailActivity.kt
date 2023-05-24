@@ -34,11 +34,12 @@ class DetailActivity : AppCompatActivity() {
 
         firestore = FirebaseFirestore.getInstance()
         //파이어스토어 메뉴명&영양성분 불러와서 리스트로 접근
-        val menus = ArrayList<MenuList>()
+        val carbos = ArrayList<CarboList>()
+        val proteins = ArrayList<ProteinList>()
+        val fats = ArrayList<FatList>()
+        val sugars = ArrayList<SugarList>()
+        val sodiums = ArrayList<SodiumList>()
         firestore?.collection("restaurantBook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-            // ArrayList 비워줌
-            menus.clear()
-
             for (snapshot in querySnapshot!!.documents) {
                 var menuname = snapshot.getString("foodname")
                 var carbo = snapshot.getDouble("carbo")
@@ -46,16 +47,21 @@ class DetailActivity : AppCompatActivity() {
                 var fat = snapshot.getDouble("fat")
                 var sugar = snapshot.getDouble("sugar")
                 var sodium = snapshot.getDouble("sodium")
-                val menu = MenuList(menuname, carbo, protein, fat, sugar, sodium)
-                menus.add(menu)
+
+                menuname?.let { carbos.add(CarboList(it, carbo)) }
+                menuname?.let { proteins.add(ProteinList(it, protein)) }
+                menuname?.let { fats.add(FatList(it, fat)) }
+                menuname?.let { sugars.add(SugarList(it, sugar)) }
+                menuname?.let { sodiums.add(SodiumList(it, sodium)) }
+
             }
         }
 
-        val sortedCarbo = menus.sortedByDescending { it.carbo!! }
-        val sortedProtein = menus.sortedByDescending { it.protein!! }
-        val sortedFat = menus.sortedByDescending { it.fat!! }
-        val sortedSugar = menus.sortedByDescending { it.sugar!! }
-        val sortedSodium = menus.sortedByDescending { it.sodium!! }
+        val sortedCarbo = carbos.sortedByDescending { it.carbo!! }
+        val sortedProtein = proteins.sortedByDescending { it.protein!! }
+        val sortedFat = fats.sortedByDescending { it.fat!! }
+        val sortedSugar = sugars.sortedByDescending { it.sugar!! }
+        val sortedSodium = sodiums.sortedByDescending { it.sodium!! }
 
         if (needNutrient == "탄수화물") {
             findViewById<Button>(R.id.buttonRecommend1).text = sortedCarbo[0].menuname
