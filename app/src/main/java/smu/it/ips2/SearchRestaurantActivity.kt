@@ -1,5 +1,6 @@
 package smu.it.ips2
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
 
+
 class SearchRestaurantActivity() : AppCompatActivity() {
     var firestore : FirebaseFirestore? = null
 
     private lateinit var recyclerView: RecyclerView
 //    private lateinit var recyclerViewAdapter: SearchRestaurantActivity.RecyclerViewAdapter
+    private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +41,10 @@ class SearchRestaurantActivity() : AppCompatActivity() {
             startActivity(intent)
         }
 
+        progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Loading...")
+        progressDialog.setCancelable(false)
+
         // 파이어스토어 인스턴스 초기화
         firestore = FirebaseFirestore.getInstance()
 
@@ -45,7 +52,7 @@ class SearchRestaurantActivity() : AppCompatActivity() {
         recyclerView.adapter= RecyclerViewAdapter()
         recyclerView.layoutManager= LinearLayoutManager(this)
 
-        var searchOption = "resname"
+        var searchOption = "searchname"
 
         // 검색 옵션에 따라 검색
         // 검색한 식당 결과 아래에 뜨도록
@@ -59,22 +66,60 @@ class SearchRestaurantActivity() : AppCompatActivity() {
     inner class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val storeBook: ArrayList<RestaurantBook> = arrayListOf()
         private val uniqueResNames: HashSet<String> = hashSetOf()
+        // 실시간 업데이트 시 사용 코드
+//        init {
+//            // 파이어스토어 인스턴스 초기화
+//            firestore = FirebaseFirestore.getInstance()
+//
+//            // 데이터 로딩 시작 시 프로그레스 다이얼로그 표시
+//            progressDialog.show()
+//
+//
+//            // storeBook의 문서를 불러온 뒤 RestaurantBook으로 변환해 ArrayList에 담음
+//            firestore?.collection("restaurantbook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+//                // ArrayList 비워줌
+//                storeBook.clear()
+//
+//                for (snapshot in querySnapshot!!.documents) {
+//                    var item = snapshot.toObject(RestaurantBook::class.java)
+//                    storeBook.add(item!!)
+//                }
+//                notifyDataSetChanged()
+//
+//                // 데이터 로딩 완료 시 프로그레스 다이얼로그 숨김
+//                onDataLoaded()
+//            }
+//        }
+        // 위에보다 속도는 빠른데, 한 번만 가져옴
 
         init {
             // 파이어스토어 인스턴스 초기화
             firestore = FirebaseFirestore.getInstance()
 
+            // 데이터 로딩 시작 시 프로그레스 다이얼로그 표시
+            progressDialog.show()
+
             // storeBook의 문서를 불러온 뒤 RestaurantBook으로 변환해 ArrayList에 담음
-            firestore?.collection("restaurantbook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            firestore?.collection("restaurantbook")?.get()?.addOnSuccessListener { querySnapshot ->
                 // ArrayList 비워줌
                 storeBook.clear()
 
-                for (snapshot in querySnapshot!!.documents) {
+                for (snapshot in querySnapshot.documents) {
                     var item = snapshot.toObject(RestaurantBook::class.java)
                     storeBook.add(item!!)
                 }
                 notifyDataSetChanged()
+                // 데이터 로딩 완료 시 프로그레스 다이얼로그 숨김
+                onDataLoaded()
+            }?.addOnFailureListener { exception ->
+                // 실패 시 에러 처리
+                // 예: Log.e("Firestore", "Error getting documents: ", exception)
             }
+        }
+
+        // 데이터 로딩 완료 시 프로그레스 다이얼로그 숨김
+        private fun onDataLoaded() {
+            progressDialog.dismiss()
         }
 
         // xml파일을 inflate하여 ViewHolder를 생성
@@ -100,7 +145,6 @@ class SearchRestaurantActivity() : AppCompatActivity() {
             }
         }
 
-
         // onCreateViewHolder에서 만든 view와 실제 데이터를 연결 (가맹점이름 중복일 경우, 숨김 처리)
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val viewHolder = holder as ViewHolder
@@ -113,8 +157,6 @@ class SearchRestaurantActivity() : AppCompatActivity() {
                 viewHolder.resname.text = currentRestaurant.resname
             }
         }
-
-
 
 
         // 리사이클러뷰의 아이템 총 개수 반환
@@ -131,13 +173,15 @@ class SearchRestaurantActivity() : AppCompatActivity() {
 
         // 파이어스토어에서 데이터를 불러와서 검색어가 있는지 판단
         fun search(searchWord: String, searchOption: String) {
+            val searchWordLowerCase = searchWord.toLowerCase().replace("\\s".toRegex(), "") // 검색어를 소문자로 변환하고 공백 제거
+
             firestore?.collection("restaurantbook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 // ArrayList 비워줌
                 storeBook.clear()
 
                 for (snapshot in querySnapshot!!.documents) {
-                    val value = snapshot.getString(searchOption)
-                    if (value != null && value.contains(searchWord)) {
+                    val value = snapshot.getString(searchOption)?.toLowerCase() // 데이터를 소문자로 변환
+                    if (value != null && value.replace("\\s".toRegex(), "").contains(searchWordLowerCase)) { // 소문자로 변환된 검색어와 데이터를 비교하고 공백 제거
                         val item = snapshot.toObject(RestaurantBook::class.java)
                         storeBook.add(item!!)
                     }
@@ -146,9 +190,6 @@ class SearchRestaurantActivity() : AppCompatActivity() {
             }
         }
 
-        // 식당 클릭하면 메뉴 검색 화면으로 이동
-
-        // 식당 즐겨찾기 하면 아이콘 바뀌고 상단에 계속 고정되도록
 
     }
 }

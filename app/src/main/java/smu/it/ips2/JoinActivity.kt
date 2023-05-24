@@ -97,7 +97,7 @@ class JoinActivity : AppCompatActivity() {
        var femaleRadioButton = binding.female
        var sex = String()
        var point: String = "0"
-       var level: String = "0"
+       var level: String = "1"
 
        //성별 라디오버튼 체크 받아오기
        if (maleRadioButton.isChecked) {
