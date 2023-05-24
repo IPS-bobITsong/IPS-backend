@@ -2,7 +2,6 @@ package smu.it.ips2
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +19,7 @@ class DetailActivity : AppCompatActivity() {
 
         val needNutrient = intent.getStringExtra("nutrient")
         findViewById<TextView>(R.id.textViewNutrient).text = needNutrient
-        findViewById<TextView>(R.id.textViewNoticeNutrient).text = needNutrient
+        findViewById<TextView>(R.id.textViewNutrient).text = needNutrient
 
         val noticeMessage = intent.getStringExtra("nutIsNeed")
         if (noticeMessage == "부족해요!") {

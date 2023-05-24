@@ -140,7 +140,7 @@ class MyPageActivity : AppCompatActivity() {
                 Log.d("SearchMenuActivity", "MenuBook Count: $menuBookCount")
                 val levelRef = database.getReference("users").child(userId.toString()).child("level")
                 when {
-                    menuBookCount >= 15 -> {
+                    menuBookCount >= 60 -> {
                         levelRef.setValue("5")
                             .addOnSuccessListener {
                                 Log.d("SearchMenuActivity", "Health Level updated to 5")
@@ -150,7 +150,7 @@ class MyPageActivity : AppCompatActivity() {
                                 Log.e("SearchMenuActivity", "Error updating level: ", e)
                             }
                     }
-                    menuBookCount >= 12 -> {
+                    menuBookCount >= 45 -> {
                         levelRef.setValue("4")
                             .addOnSuccessListener {
                                 Log.d("SearchMenuActivity", "Health Level updated to 4")
@@ -160,7 +160,7 @@ class MyPageActivity : AppCompatActivity() {
                                 Log.e("SearchMenuActivity", "Error updating level: ", e)
                             }
                     }
-                    menuBookCount >= 9 -> {
+                    menuBookCount >= 30 -> {
                         levelRef.setValue("3")
                             .addOnSuccessListener {
                                 Log.d("SearchMenuActivity", "Health Level updated to 3")
@@ -169,7 +169,7 @@ class MyPageActivity : AppCompatActivity() {
                                 Log.e("SearchMenuActivity", "Error updating level: ", e)
                             }
                     }
-                    menuBookCount >= 6 -> {
+                    menuBookCount >= 15 -> {
                         levelRef.setValue("2")
                             .addOnSuccessListener {
                                 Log.d("SearchMenuActivity", "Health Level updated to 2")
@@ -178,7 +178,7 @@ class MyPageActivity : AppCompatActivity() {
                                 Log.e("SearchMenuActivity", "Error updating level: ", e)
                             }
                     }
-                    menuBookCount >= 3 -> {
+                    menuBookCount >= 0 -> {
                         levelRef.setValue("1")
                             .addOnSuccessListener {
                                 Log.d("SearchMenuActivity", "Health Level updated to 1")
