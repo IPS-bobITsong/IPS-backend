@@ -1,5 +1,6 @@
 package smu.it.ips2
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +28,7 @@ class SearchMenuActivity : AppCompatActivity() {
     private lateinit var searchQuery: String
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_menu)
@@ -45,15 +47,18 @@ class SearchMenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 메뉴 검색 결과 아래에 뜨도록
-        findViewById<ImageButton>(R.id.searchBtn).setOnClickListener {
-            // 검색 버튼 클릭 시, 사용자의 검색어를 가져와서 searchQuery 변수에 저장
-            val searchEditText = findViewById<EditText>(R.id.inputMenu)
-            searchQuery = searchEditText.text.toString()
+        var selectedRes = findViewById<TextView>(R.id.selected)
+        selectedRes.text = intent.getStringExtra("resname")
 
-            // 검색어를 사용하여 RecyclerViewAdapter의 filter 메소드 호출
-            recyclerViewAdapter.filter(searchQuery)
-        }
+//        // 메뉴 검색 결과 아래에 뜨도록
+//        findViewById<ImageButton>(R.id.searchBtn).setOnClickListener {
+//            // 검색 버튼 클릭 시, 사용자의 검색어를 가져와서 searchQuery 변수에 저장
+//            val searchEditText = findViewById<EditText>(R.id.inputMenu)
+//            searchQuery = searchEditText.text.toString()
+//
+//            // 검색어를 사용하여 RecyclerViewAdapter의 filter 메소드 호출
+//            recyclerViewAdapter.filter(searchQuery)
+//        }
 
         // 파이어스토어 인스턴스 초기화
         firestore = FirebaseFirestore.getInstance()
