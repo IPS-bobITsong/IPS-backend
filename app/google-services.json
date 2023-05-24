@@ -1,42 +1,34 @@
 {
   "project_info": {
-    "project_number": "460113897860",
-    "firebase_url": "https://ips-babitsong-default-rtdb.firebaseio.com",
-    "project_id": "ips-babitsong",
-    "storage_bucket": "ips-babitsong.appspot.com"
+    "project_number": "45219706235",
+    "firebase_url": "https://ips-bobitsong-d448d-default-rtdb.firebaseio.com",
+    "project_id": "ips-bobitsong-d448d",
+    "storage_bucket": "ips-bobitsong-d448d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:460113897860:android:89ef97e034ee851de515d1",
+        "mobilesdk_app_id": "1:45219706235:android:f8f78c5dd5432bb83379de",
         "android_client_info": {
           "package_name": "smu.it.ips2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "460113897860-u9cedu3ue2fsg6lnqu0cq1c0br2npsih.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "smu.it.ips2",
-            "certificate_hash": "89ec5f64776b401db05d24ea29da6a482b963fe7"
-          }
-        },
-        {
-          "client_id": "460113897860-9vmmtkv0v76s16u31e6aod3s130dpbsa.apps.googleusercontent.com",
+          "client_id": "45219706235-9jud86t2n83cf3f43olelat916rh36qd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDhpuxsLRMAQsOuLUAoYY5k3j6swG89TxI"
+          "current_key": "AIzaSyATtpyf3l45Sm9DaUm1Us0yAFgFVl2BL6w"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "460113897860-9vmmtkv0v76s16u31e6aod3s130dpbsa.apps.googleusercontent.com",
+              "client_id": "45219706235-9jud86t2n83cf3f43olelat916rh36qd.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
