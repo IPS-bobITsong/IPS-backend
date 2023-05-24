@@ -47,8 +47,8 @@ class DetailActivity : AppCompatActivity() {
             .addOnSuccessListener { querySnapshot ->
                 // 성공적으로 데이터를 가져온 경우
                 for (document in querySnapshot) {
-                    val item = document.getString("foodname")
-                    Log.d("foodname", item.toString())
+                    //val item = document.getString("foodname")
+                    //Log.d("foodname", item.toString())
                     val fieldValue = when (needNutrient) {
                         "탄수화물" -> document.getDouble("carbo")!!
                         "단백질" -> document.getDouble("protein")!!
