@@ -140,21 +140,21 @@ class SearchMenuActivity : AppCompatActivity() {
                         view.context.startActivity(intent)
 
 
-//                        val currentUser = auth.currentUser
-//                        val userId = currentUser?.uid
-//                        // 파이어스토어 인스턴스 초기화
-//                        firestore = FirebaseFirestore.getInstance()
-//
-//                        // 사용자별 컬렉션에 데이터 저장
-//                        firestore.collection("users").document(userId.toString())
-//                            .collection("menubook")
-//                            .add(menu)
-//                            .addOnSuccessListener { documentReference ->
-//                                Log.d("SearchMenuActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
-//                            }
-//                            .addOnFailureListener { e ->
-//                                Log.w("SearchMenuActivity", "Error adding document", e)
-//                            }
+                        val currentUser = auth.currentUser
+                        val userId = currentUser?.uid
+                        // 파이어스토어 인스턴스 초기화
+                        firestore = FirebaseFirestore.getInstance()
+
+                        // 사용자별 컬렉션에 데이터 저장
+                        firestore.collection("users").document(userId.toString())
+                            .collection("menubook")
+                            .add(menu)
+                            .addOnSuccessListener { documentReference ->
+                                Log.d("SearchMenuActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.w("SearchMenuActivity", "Error adding document", e)
+                            }
                     }
                 }
             }
