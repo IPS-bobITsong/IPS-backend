@@ -19,28 +19,43 @@ class CompleteActivity : AppCompatActivity() {
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
     lateinit var firestore : FirebaseFirestore
 
-    var standard_carbohydrate: Double = 0.0
-    var standard_protein: Double = 0.0
-    var standard_fat: Double = 0.0
-    var standard_sugars: Double = 0.0
-    var standard_sodium: Double = 0.0
+    private var u_menuName: String = ""
+    private var u_carbohydrate: Double = 0.0
+    private var u_protein: Double = 0.0
+    private var u_fat: Double = 0.0
+    private var u_sugars: Double = 0.0
+    private var u_sodium: Double = 0.0
 
-    var u_menuName: String? = ""
-
-    var u_carbohydrate: Double? = 0.0
-    var u_protein: Double? = 0.0
-    var u_fat: Double? = 0.0
-    var u_sugars: Double? = 0.0
-    var u_sodium: Double? = 0.0
-
+    private var standard_carbohydrate: Double = 0.0
+    private var standard_protein: Double = 0.0
+    private var standard_fat: Double = 0.0
+    private var standard_sugars: Double = 0.0
+    private var standard_sodium: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete)
 
+        u_menuName = intent.getStringExtra("foodname").toString()
+        u_carbohydrate = intent.getDoubleExtra("carbo", 0.0)
+        u_protein = intent.getDoubleExtra("protein", 0.0)
+        u_fat = intent.getDoubleExtra("fat", 0.0)
+        u_sugars = intent.getDoubleExtra("sugars", 0.0)
+        u_sodium = intent.getDoubleExtra("sodium", 0.0)
+
+        findViewById<TextView>(R.id.selectedMenu).text = u_menuName
+        findViewById<TextView>(R.id.carbohydrate).text = u_carbohydrate.toString()
+        findViewById<TextView>(R.id.protein).text = u_protein.toString()
+        findViewById<TextView>(R.id.fat).text = u_fat.toString()
+        findViewById<TextView>(R.id.sugars).text = u_sugars.toString()
+        findViewById<TextView>(R.id.sodium).text = u_sodium.toString()
+
+
+
         //사용자 나이에 따라 기준 영양소 세팅
         val currentUser = auth.currentUser
         val userId = currentUser?.uid
+
         if (userId != null) {
             database.getReference("users").child(userId).child("age")
                 .addListenerForSingleValueEvent(object :
@@ -85,6 +100,47 @@ class CompleteActivity : AppCompatActivity() {
                                 standard_sugars = 15.0
                                 standard_sodium = 500.0
                             }
+                            Log.d("SearchMenuActivity", "standard_fat11: $standard_fat")
+                        }
+                        Log.d("SearchMenuActivity", "s_fat12: $standard_fat")
+                        val r_carbohydrate: Double? = standard_carbohydrate - u_carbohydrate!!
+                        val r_protein: Double? = standard_protein - u_protein!!
+                        val r_fat: Double? = standard_fat - u_fat!!
+                        val r_sugars: Double? = standard_sugars - u_sugars!!
+                        val r_sodium: Double? = standard_sodium - u_sodium!!
+                        //기준-영양소 계산 후 절댓값 씌우기
+                        val a_carbohydrate = Math.abs(r_carbohydrate!!)
+                        val a_protein = Math.abs(r_protein!!)
+                        val a_fat = Math.abs(r_fat!!)
+                        val a_sugars = Math.abs(r_sugars!!)
+                        val a_sodium = Math.abs(r_sodium!!)
+                        Log.d("SearchMenuActivity", "a_carbo: $a_carbohydrate")
+                        Log.d("SearchMenuActivity", "a_protein: $a_protein")
+                        Log.d("SearchMenuActivity", "a_fat: $a_fat")
+                        Log.d("SearchMenuActivity", "a_sugars: $a_sugars")
+                        Log.d("SearchMenuActivity", "a_sodium: $a_sodium")
+                        //절댓값 가장 큰 영양소 나타내기
+                        val arr:Array<Double> = arrayOf(a_carbohydrate, a_protein, a_fat, a_sugars, a_sodium)
+                        val noticeNutrient = compare(arr)
+                        Log.d("SearchMenuActivity", "noticeNutrient: $noticeNutrient")
+                        findViewById<TextView>(R.id.nutrient).text = noticeNutrient
+                        // 과다/부족
+                        var moreOrLess = findViewById<TextView>(R.id.moreOrLess)
+                        if (noticeNutrient == "탄수화물") {
+                            if (r_carbohydrate < 0.0) moreOrLess.text = "과다해요!"
+                            else moreOrLess.text = "부족해요!"
+                        } else if (noticeNutrient == "단백질") {
+                            if (r_protein < 0.0) moreOrLess.text = "과다해요!"
+                            else moreOrLess.text = "부족해요!"
+                        } else if (noticeNutrient == "지방") {
+                            if (r_fat < 0.0) moreOrLess.text = "과다해요!"
+                            else moreOrLess.text = "부족해요!"
+                        } else if (noticeNutrient == "당류") {
+                            if (r_sugars < 0.0) moreOrLess.text = "과다해요!"
+                            else moreOrLess.text = "부족해요!"
+                        } else {
+                            if (r_sodium < 0.0) moreOrLess.text = "과다해요!"
+                            else moreOrLess.text = "부족해요!"
                         }
                     }
 
@@ -93,94 +149,12 @@ class CompleteActivity : AppCompatActivity() {
                 })
         }
 
-        u_menuName = intent.getStringExtra("foodname")
-        u_carbohydrate = intent.getDoubleExtra("carbo", 0.0)
-        u_protein = intent.getDoubleExtra("protein", 0.0)
-        u_fat = intent.getDoubleExtra("fat", 0.0)
-        u_sugars = intent.getDoubleExtra("sugars", 0.0)
-        u_sodium = intent.getDoubleExtra("sodium", 0.0)
-
-        findViewById<TextView>(R.id.selectedMenu).text = u_menuName
-        findViewById<TextView>(R.id.carbohydrate).text = u_carbohydrate.toString()
-        findViewById<TextView>(R.id.protein).text = u_protein.toString()
-        findViewById<TextView>(R.id.fat).text = u_fat.toString()
-        findViewById<TextView>(R.id.sugars).text = u_sugars.toString()
-        findViewById<TextView>(R.id.sodium).text = u_sodium.toString()
-
-
-//        // 파이어스토어 인스턴스 초기화
-//        firestore = FirebaseFirestore.getInstance()
-//        firestore.collection("users").document(userId.toString())
-//            .collection("menubook")
-//            .get()
-//            .addOnSuccessListener { querySnapshot ->
-//                val menuBookCount = querySnapshot.size()
-//                Log.d("SearchMenuActivity", "MenuBook Count: $menuBookCount")
-//                ArrayList<MenuBook>().clear()
-//                if (!querySnapshot.isEmpty) {
-//                    val documentSnapshot = querySnapshot.documents[menuBookCount-1]
-//                    val menu = documentSnapshot.toObject(MenuBook::class.java)
-//                    ArrayList<MenuBook>().add(menu!!)
-//                    //Log.d("carbo", menu!!.carbo.toString())
-//                    //u_menuName = menu?.foodname
-//                    u_carbohydrate = menu.carbo
-//                    u_protein = menu.protein
-//                    u_fat = menu.fat
-//                    u_sugars = menu.sugars
-//                    u_sodium = menu.sodium
-//
-//                    //findViewById<TextView>(R.id.foodName).text = menu?.foodname.toString()
-//                    findViewById<TextView>(R.id.carbohydrate).text = u_carbohydrate.toString()
-//                    findViewById<TextView>(R.id.protein).text = u_protein.toString()
-//                    findViewById<TextView>(R.id.fat).text = u_fat.toString()
-//                    findViewById<TextView>(R.id.sugars).text = u_sugars.toString()
-//                    findViewById<TextView>(R.id.sodium).text = u_sodium.toString()
-//                }
-//            }
-//            .addOnFailureListener { e ->
-//                Log.e("SearchMenuActivity", "Error getting documents: ", e)
-//            }
 
 
         Log.d("SearchMenuActivity", "carbo: $u_carbohydrate")
         Log.d("SearchMenuActivity", "protein: $u_protein")
         Log.d("SearchMenuActivity", "fat: $u_fat")
 
-        val r_carbohydrate: Double? = standard_carbohydrate - u_carbohydrate!!
-        val r_protein: Double? = standard_protein - u_protein!!
-        val r_fat: Double? = standard_fat - u_fat!!
-        val r_sugars: Double? = standard_sugars - u_sugars!!
-        val r_sodium: Double? = standard_sodium - u_sodium!!
-
-        //기준-영양소 계산 후 절댓값 씌우기
-        val a_carbohydrate = Math.abs(r_carbohydrate!!)
-        val a_protein = Math.abs(r_protein!!)
-        val a_fat = Math.abs(r_fat!!)
-        val a_sugars = Math.abs(r_sugars!!)
-        val a_sodium = Math.abs(r_sodium!!)
-
-        //절댓값 가장 큰 영양소 나타내기
-        val arr:Array<Double> = arrayOf(a_carbohydrate, a_protein, a_fat, a_sugars, a_sodium)
-        val noticeNutrient = compare(arr)
-        findViewById<TextView>(R.id.nutrient).text = noticeNutrient
-        // 과다/부족
-        var moreOrLess = findViewById<TextView>(R.id.moreOrLess)
-        if (noticeNutrient == "탄수화물") {
-            if (r_carbohydrate > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        } else if (noticeNutrient == "단백질") {
-            if (r_protein > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        } else if (noticeNutrient == "지방") {
-            if (r_fat > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        } else if (noticeNutrient == "당류") {
-            if (r_sugars > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        } else {
-            if (r_sodium > 0.0) moreOrLess.text = "과다해요!"
-            else moreOrLess.text = "부족해요!"
-        }
 
 //        //과다/부족 글자 나타내기
 //        val needText = findViewById<TextView>(R.id.moreOrLess)
@@ -207,12 +181,12 @@ class CompleteActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        findViewById<ImageButton>(R.id.nextBtn).setOnClickListener {
-            intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("nutrient", noticeNutrient)
-//            intent.putExtra("needtext", needText.text)
-            startActivity(intent)
-        }
+//        findViewById<ImageButton>(R.id.nextBtn).setOnClickListener {
+//            intent = Intent(this, DetailActivity::class.java)
+//            intent.putExtra("nutrient", noticeNutrient)
+////            intent.putExtra("needtext", needText.text)
+//            startActivity(intent)
+//        }
 
         val database = FirebaseDatabase.getInstance()
 
