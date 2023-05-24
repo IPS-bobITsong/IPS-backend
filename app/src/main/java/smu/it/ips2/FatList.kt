@@ -1,8 +1,6 @@
 package smu.it.ips2
 
-data class MenuList(
+data class FatList(
     val menuname: String? = "",
-    val carbo: Double?,
-    val protein: Double?,
     val fat: Double?
 )
