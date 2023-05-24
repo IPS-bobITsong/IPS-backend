@@ -32,14 +32,62 @@ class DetailActivity : AppCompatActivity() {
         }
 
 
+//        firestore = FirebaseFirestore.getInstance()
+//        //파이어스토어 메뉴명&영양성분 불러와서 리스트로 접근
+//        val carbos = ArrayList<CarboList>()
+//        val proteins = ArrayList<ProteinList>()
+//        val fats = ArrayList<FatList>()
+//        val sugars = ArrayList<SugarList>()
+//        val sodiums = ArrayList<SodiumList>()
+//        firestore.collection("restaurantBook").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+//            for (snapshot in querySnapshot!!.documents) {
+//                var menuname = snapshot.getString("foodname")
+//                var carbo = snapshot.getDouble("carbo")
+//                var protein = snapshot.getDouble("protein")
+//                var fat = snapshot.getDouble("fat")
+//                var sugar = snapshot.getDouble("sugar")
+//                var sodium = snapshot.getDouble("sodium")
+//
+//                menuname?.let { carbos.add(CarboList(it, carbo)) }
+//                menuname?.let { proteins.add(ProteinList(it, protein)) }
+//                menuname?.let { fats.add(FatList(it, fat)) }
+//                menuname?.let { sugars.add(SugarList(it, sugar)) }
+//                menuname?.let { sodiums.add(SodiumList(it, sodium)) }
+//
+//            }
+//        }
+//
+//        val sortedCarbo = carbos.sortedByDescending { it.carbo!! }
+//        val sortedProtein = proteins.sortedByDescending { it.protein!! }
+//        val sortedFat = fats.sortedByDescending { it.fat!! }
+//        val sortedSugar = sugars.sortedByDescending { it.sugar!! }
+//        val sortedSodium = sodiums.sortedByDescending { it.sodium!! }
+//
+//        if (needNutrient == "탄수화물") {
+//            findViewById<Button>(R.id.buttonRecommend1).text = sortedCarbo[0].menuname
+//            findViewById<Button>(R.id.buttonRecommend2).text = sortedCarbo[1].menuname
+//        }else if (needNutrient == "단백질") {
+//            findViewById<Button>(R.id.buttonRecommend1).text = sortedProtein[0].menuname
+//            findViewById<Button>(R.id.buttonRecommend2).text = sortedProtein[1].menuname
+//        }else if (needNutrient == "지방") {
+//            findViewById<Button>(R.id.buttonRecommend1).text = sortedFat[0].menuname
+//            findViewById<Button>(R.id.buttonRecommend2).text = sortedFat[1].menuname
+//        }else if (needNutrient == "당") {
+//            findViewById<Button>(R.id.buttonRecommend1).text = sortedSugar[0].menuname
+//            findViewById<Button>(R.id.buttonRecommend2).text = sortedSugar[1].menuname
+//        }else if (needNutrient == "나트륨") {
+//            findViewById<Button>(R.id.buttonRecommend1).text = sortedSodium[0].menuname
+//            findViewById<Button>(R.id.buttonRecommend2).text = sortedSodium[1].menuname
+//        }
+
         firestore = FirebaseFirestore.getInstance()
-        //파이어스토어 메뉴명&영양성분 불러와서 리스트로 접근
-        val carbos = ArrayList<CarboList>()
-        val proteins = ArrayList<ProteinList>()
-        val fats = ArrayList<FatList>()
-        val sugars = ArrayList<SugarList>()
-        val sodiums = ArrayList<SodiumList>()
         firestore.collection("restaurantBook").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            val carbos = ArrayList<CarboList>()
+            val proteins = ArrayList<ProteinList>()
+            val fats = ArrayList<FatList>()
+            val sugars = ArrayList<SugarList>()
+            val sodiums = ArrayList<SodiumList>()
+
             for (snapshot in querySnapshot!!.documents) {
                 var menuname = snapshot.getString("foodname")
                 var carbo = snapshot.getDouble("carbo")
@@ -53,31 +101,30 @@ class DetailActivity : AppCompatActivity() {
                 menuname?.let { fats.add(FatList(it, fat)) }
                 menuname?.let { sugars.add(SugarList(it, sugar)) }
                 menuname?.let { sodiums.add(SodiumList(it, sodium)) }
-
             }
-        }
 
-        val sortedCarbo = carbos.sortedByDescending { it.carbo!! }
-        val sortedProtein = proteins.sortedByDescending { it.protein!! }
-        val sortedFat = fats.sortedByDescending { it.fat!! }
-        val sortedSugar = sugars.sortedByDescending { it.sugar!! }
-        val sortedSodium = sodiums.sortedByDescending { it.sodium!! }
+            val sortedCarbo = carbos.sortedByDescending { it.carbo!! }
+            val sortedProtein = proteins.sortedByDescending { it.protein!! }
+            val sortedFat = fats.sortedByDescending { it.fat!! }
+            val sortedSugar = sugars.sortedByDescending { it.sugar!! }
+            val sortedSodium = sodiums.sortedByDescending { it.sodium!! }
 
-        if (needNutrient == "탄수화물") {
-            findViewById<Button>(R.id.buttonRecommend1).text = sortedCarbo[0].menuname
-            findViewById<Button>(R.id.buttonRecommend2).text = sortedCarbo[1].menuname
-        }else if (needNutrient == "단백질") {
-            findViewById<Button>(R.id.buttonRecommend1).text = sortedProtein[0].menuname
-            findViewById<Button>(R.id.buttonRecommend2).text = sortedProtein[1].menuname
-        }else if (needNutrient == "지방") {
-            findViewById<Button>(R.id.buttonRecommend1).text = sortedFat[0].menuname
-            findViewById<Button>(R.id.buttonRecommend2).text = sortedFat[1].menuname
-        }else if (needNutrient == "당") {
-            findViewById<Button>(R.id.buttonRecommend1).text = sortedSugar[0].menuname
-            findViewById<Button>(R.id.buttonRecommend2).text = sortedSugar[1].menuname
-        }else if (needNutrient == "나트륨") {
-            findViewById<Button>(R.id.buttonRecommend1).text = sortedSodium[0].menuname
-            findViewById<Button>(R.id.buttonRecommend2).text = sortedSodium[1].menuname
+            if (needNutrient == "탄수화물") {
+                findViewById<Button>(R.id.buttonRecommend1).text = sortedCarbo[0].menuname
+                findViewById<Button>(R.id.buttonRecommend2).text = sortedCarbo[1].menuname
+            } else if (needNutrient == "단백질") {
+                findViewById<Button>(R.id.buttonRecommend1).text = sortedProtein[0].menuname
+                findViewById<Button>(R.id.buttonRecommend2).text = sortedProtein[1].menuname
+            } else if (needNutrient == "지방") {
+                findViewById<Button>(R.id.buttonRecommend1).text = sortedFat[0].menuname
+                findViewById<Button>(R.id.buttonRecommend2).text = sortedFat[1].menuname
+            } else if (needNutrient == "당") {
+                findViewById<Button>(R.id.buttonRecommend1).text = sortedSugar[0].menuname
+                findViewById<Button>(R.id.buttonRecommend2).text = sortedSugar[1].menuname
+            } else if (needNutrient == "나트륨") {
+                findViewById<Button>(R.id.buttonRecommend1).text = sortedSodium[0].menuname
+                findViewById<Button>(R.id.buttonRecommend2).text = sortedSodium[1].menuname
+            }
         }
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
