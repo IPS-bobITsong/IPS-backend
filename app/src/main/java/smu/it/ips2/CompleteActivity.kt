@@ -43,7 +43,8 @@ class CompleteActivity : AppCompatActivity() {
         u_sugars = intent.getDoubleExtra("sugars", 0.0)
         u_sodium = intent.getDoubleExtra("sodium", 0.0)
 
-        findViewById<TextView>(R.id.selectedMenu).text = u_menuName
+        findViewById<TextView>(R.id.selectedMenu1).text = u_menuName
+        findViewById<TextView>(R.id.selectedMenu2).text = u_menuName
         findViewById<TextView>(R.id.carbohydrate).text = u_carbohydrate.toString()
         findViewById<TextView>(R.id.protein).text = u_protein.toString()
         findViewById<TextView>(R.id.fat).text = u_fat.toString()
@@ -103,43 +104,75 @@ class CompleteActivity : AppCompatActivity() {
                             Log.d("SearchMenuActivity", "standard_fat11: $standard_fat")
                         }
                         Log.d("SearchMenuActivity", "s_fat12: $standard_fat")
-                        val r_carbohydrate: Double? = standard_carbohydrate - u_carbohydrate!!
-                        val r_protein: Double? = standard_protein - u_protein!!
-                        val r_fat: Double? = standard_fat - u_fat!!
-                        val r_sugars: Double? = standard_sugars - u_sugars!!
-                        val r_sodium: Double? = standard_sodium - u_sodium!!
-                        //기준-영양소 계산 후 절댓값 씌우기
-                        val a_carbohydrate = Math.abs(r_carbohydrate!!)
-                        val a_protein = Math.abs(r_protein!!)
-                        val a_fat = Math.abs(r_fat!!)
-                        val a_sugars = Math.abs(r_sugars!!)
-                        val a_sodium = Math.abs(r_sodium!!)
-                        Log.d("SearchMenuActivity", "a_carbo: $a_carbohydrate")
-                        Log.d("SearchMenuActivity", "a_protein: $a_protein")
-                        Log.d("SearchMenuActivity", "a_fat: $a_fat")
-                        Log.d("SearchMenuActivity", "a_sugars: $a_sugars")
-                        Log.d("SearchMenuActivity", "a_sodium: $a_sodium")
-                        //절댓값 가장 큰 영양소 나타내기
-                        val arr:Array<Double> = arrayOf(a_carbohydrate, a_protein, a_fat, a_sugars, a_sodium)
+                        var r_carbohydrate: Double = 0.0
+                        var r_protein: Double = 0.0
+                        var r_fat: Double = 0.0
+                        var r_sugars: Double = 0.0
+                        var r_sodium: Double = 0.0
+
+                        var carbohydrate_more: Boolean = true
+                        var protein_more: Boolean = true
+                        var fat_more: Boolean = true
+                        var sugars_more: Boolean = true
+                        var sodium_more: Boolean = true
+                        // 영양소 / 기준 계산 후 차이값 계산하기
+                        if (standard_carbohydrate > u_carbohydrate) {
+                            r_carbohydrate = u_carbohydrate / standard_carbohydrate
+                            carbohydrate_more = false
+                        }
+                        else r_carbohydrate = standard_carbohydrate / u_carbohydrate
+                        if (standard_protein > u_protein) {
+                            r_protein = u_protein / standard_protein
+                            protein_more = false
+                        }
+                        else r_protein = standard_protein / u_protein
+                        if (standard_fat > u_fat) {
+                            r_fat = u_fat / standard_fat
+                            fat_more = false
+                        }
+                        else r_fat = standard_fat / u_fat
+                        if (standard_sugars > u_sugars) {
+                            r_sugars = u_sugars / standard_sugars
+                            sugars_more = false
+                        }
+                        else r_sugars = standard_sugars / u_sugars
+                        if (standard_sodium > u_sodium) {
+                            r_sodium = u_sodium / standard_sodium
+                            sodium_more = false
+                        }
+                        else r_sodium = standard_sodium / u_sodium
+//                        //기준-영양소 계산 후 절댓값 씌우기
+//                        val a_carbohydrate = Math.abs(r_carbohydrate!!)
+//                        val a_protein = Math.abs(r_protein!!)
+//                        val a_fat = Math.abs(r_fat!!)
+//                        val a_sugars = Math.abs(r_sugars!!)
+//                        val a_sodium = Math.abs(r_sodium!!)
+                        Log.d("SearchMenuActivity", "a_carbo: $r_carbohydrate")
+                        Log.d("SearchMenuActivity", "a_protein: $r_protein")
+                        Log.d("SearchMenuActivity", "a_fat: $r_fat")
+                        Log.d("SearchMenuActivity", "a_sugars: $r_sugars")
+                        Log.d("SearchMenuActivity", "a_sodium: $r_sodium")
+                        //차이값 가장 큰 영양소 나타내기
+                        val arr:Array<Double> = arrayOf(r_carbohydrate, r_protein, r_fat, r_sugars, r_sodium)
                         val noticeNutrient = compare(arr)
                         Log.d("SearchMenuActivity", "noticeNutrient: $noticeNutrient")
                         findViewById<TextView>(R.id.nutrient).text = noticeNutrient
                         // 과다/부족
                         var moreOrLess = findViewById<TextView>(R.id.moreOrLess)
                         if (noticeNutrient == "탄수화물") {
-                            if (r_carbohydrate < 0.0) moreOrLess.text = "과다해요!"
+                            if (carbohydrate_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         } else if (noticeNutrient == "단백질") {
-                            if (r_protein < 0.0) moreOrLess.text = "과다해요!"
+                            if (protein_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         } else if (noticeNutrient == "지방") {
-                            if (r_fat < 0.0) moreOrLess.text = "과다해요!"
+                            if (fat_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         } else if (noticeNutrient == "당류") {
-                            if (r_sugars < 0.0) moreOrLess.text = "과다해요!"
+                            if (sugars_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         } else {
-                            if (r_sodium < 0.0) moreOrLess.text = "과다해요!"
+                            if (sodium_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         }
                     }
@@ -220,11 +253,11 @@ class CompleteActivity : AppCompatActivity() {
         })
     }
 
-    //세가지 기준-영양 입력받고, 가장 절댓값이 큰 값 알아내기
+    //가장 차이값이 큰 값 알아내기
     fun compare(
         array: Array<Double>
     ): String {
-        var largest = array[0]
+        var largest: Double = 0.0
         for (i in array) {
             if (i > largest) largest = i
         }
