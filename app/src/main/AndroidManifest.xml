@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IPS"
         tools:targetApi="31">
@@ -54,15 +54,15 @@
         <activity
             android:name=".CorrectActivity"
             android:exported="false" />
-        <activity
+        <!--<activity
             android:name=".QuizBrainActivity"
-            android:exported="false" />
+            android:exported="false" />-->
         <activity
             android:name=".QuizCarboActivity"
             android:exported="false" />
-        <activity
+        <!--<activity
             android:name=".QuizConfidenceActivity"
-            android:exported="false" />
+            android:exported="false" />-->
         <activity
             android:name=".QuizFatActivity"
             android:exported="false" />
@@ -72,9 +72,9 @@
         <activity
             android:name=".QuizProteinActivity"
             android:exported="false" />
-        <activity
+        <!--<activity
             android:name=".QuizSchoolActivity"
-            android:exported="false" />
+            android:exported="false" />-->
         <activity
             android:name=".QuizSodiumActivity"
             android:exported="false" />
