@@ -100,7 +100,6 @@ class SearchRestaurantActivity() : AppCompatActivity() {
             }
         }
 
-
         // onCreateViewHolder에서 만든 view와 실제 데이터를 연결 (가맹점이름 중복일 경우, 숨김 처리)
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             val viewHolder = holder as ViewHolder
@@ -113,8 +112,6 @@ class SearchRestaurantActivity() : AppCompatActivity() {
                 viewHolder.resname.text = currentRestaurant.resname
             }
         }
-
-
 
 
         // 리사이클러뷰의 아이템 총 개수 반환
@@ -131,13 +128,15 @@ class SearchRestaurantActivity() : AppCompatActivity() {
 
         // 파이어스토어에서 데이터를 불러와서 검색어가 있는지 판단
         fun search(searchWord: String, searchOption: String) {
+            val searchWordLowerCase = searchWord.toLowerCase().replace("\\s".toRegex(), "") // 검색어를 소문자로 변환하고 공백 제거
+
             firestore?.collection("restaurantbook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 // ArrayList 비워줌
                 storeBook.clear()
 
                 for (snapshot in querySnapshot!!.documents) {
-                    val value = snapshot.getString(searchOption)
-                    if (value != null && value.contains(searchWord)) {
+                    val value = snapshot.getString(searchOption)?.toLowerCase() // 데이터를 소문자로 변환
+                    if (value != null && value.replace("\\s".toRegex(), "").contains(searchWordLowerCase)) { // 소문자로 변환된 검색어와 데이터를 비교하고 공백 제거
                         val item = snapshot.toObject(RestaurantBook::class.java)
                         storeBook.add(item!!)
                     }
@@ -146,9 +145,6 @@ class SearchRestaurantActivity() : AppCompatActivity() {
             }
         }
 
-        // 식당 클릭하면 메뉴 검색 화면으로 이동
-
-        // 식당 즐겨찾기 하면 아이콘 바뀌고 상단에 계속 고정되도록
 
     }
 }
