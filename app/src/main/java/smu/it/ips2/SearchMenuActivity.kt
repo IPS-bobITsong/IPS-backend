@@ -1,5 +1,6 @@
 package smu.it.ips2
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +28,7 @@ class SearchMenuActivity : AppCompatActivity() {
     private lateinit var searchQuery: String
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_menu)
@@ -45,15 +47,18 @@ class SearchMenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 메뉴 검색 결과 아래에 뜨도록
-        findViewById<ImageButton>(R.id.searchBtn).setOnClickListener {
-            // 검색 버튼 클릭 시, 사용자의 검색어를 가져와서 searchQuery 변수에 저장
-            val searchEditText = findViewById<EditText>(R.id.inputMenu)
-            searchQuery = searchEditText.text.toString()
+        var selectedRes = findViewById<TextView>(R.id.selected)
+        selectedRes.text = intent.getStringExtra("resname")
 
-            // 검색어를 사용하여 RecyclerViewAdapter의 filter 메소드 호출
-            recyclerViewAdapter.filter(searchQuery)
-        }
+//        // 메뉴 검색 결과 아래에 뜨도록
+//        findViewById<ImageButton>(R.id.searchBtn).setOnClickListener {
+//            // 검색 버튼 클릭 시, 사용자의 검색어를 가져와서 searchQuery 변수에 저장
+//            val searchEditText = findViewById<EditText>(R.id.inputMenu)
+//            searchQuery = searchEditText.text.toString()
+//
+//            // 검색어를 사용하여 RecyclerViewAdapter의 filter 메소드 호출
+//            recyclerViewAdapter.filter(searchQuery)
+//        }
 
         // 파이어스토어 인스턴스 초기화
         firestore = FirebaseFirestore.getInstance()
@@ -125,25 +130,31 @@ class SearchMenuActivity : AppCompatActivity() {
                         menu.isSelected = true
                         Log.d("size", menu.toString())
                         val intent = Intent(view.context, CompleteActivity::class.java)
-                        intent.putExtra("resname", menu.foodname)
+                        intent.putExtra("foodname", menu.foodname)
+                        intent.putExtra("carbo", menu.carbo)
+                        intent.putExtra("protein", menu.protein)
+                        intent.putExtra("fat", menu.fat)
+                        intent.putExtra("sugars", menu.sugars)
+                        intent.putExtra("sodium", menu.sodium)
+                       // intent.putExtra("resname", menu.foodname)
                         view.context.startActivity(intent)
 
 
-                        val currentUser = auth.currentUser
-                        val userId = currentUser?.uid
-                        // 파이어스토어 인스턴스 초기화
-                        firestore = FirebaseFirestore.getInstance()
-
-                        // 사용자별 컬렉션에 데이터 저장
-                        firestore.collection("users").document(userId.toString())
-                            .collection("menubook")
-                            .add(menu)
-                            .addOnSuccessListener { documentReference ->
-                                Log.d("SearchMenuActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
-                            }
-                            .addOnFailureListener { e ->
-                                Log.w("SearchMenuActivity", "Error adding document", e)
-                            }
+//                        val currentUser = auth.currentUser
+//                        val userId = currentUser?.uid
+//                        // 파이어스토어 인스턴스 초기화
+//                        firestore = FirebaseFirestore.getInstance()
+//
+//                        // 사용자별 컬렉션에 데이터 저장
+//                        firestore.collection("users").document(userId.toString())
+//                            .collection("menubook")
+//                            .add(menu)
+//                            .addOnSuccessListener { documentReference ->
+//                                Log.d("SearchMenuActivity", "DocumentSnapshot added with ID: ${documentReference.id}")
+//                            }
+//                            .addOnFailureListener { e ->
+//                                Log.w("SearchMenuActivity", "Error adding document", e)
+//                            }
                     }
                 }
             }

@@ -75,26 +75,37 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="30dp"
+        android:gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
-        <EditText
-            android:id="@+id/inputMenu"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
+        <TextView
+            android:id="@+id/selected"
+            android:text="가맹점명"
+            android:textStyle="bold"
+            android:textSize="10pt"
+            android:padding="10dp"
             android:background="@drawable/box_border"
-            android:hint="메뉴를 입력하세요"
-            android:padding="10dp" />
+            android:layout_width="300dp"
+            android:layout_height="50dp"/>
 
-        <ImageButton
-            android:id="@+id/searchBtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/searchbeforebtn"
-            android:contentDescription="검색하기 버튼"/>
+        <!--        <EditText-->
+        <!--            android:id="@+id/inputMenu"-->
+        <!--            android:layout_width="300dp"-->
+        <!--            android:layout_height="50dp"-->
+        <!--            android:background="@drawable/box_border"-->
+        <!--            android:hint="메뉴를 입력하세요"-->
+        <!--            android:padding="10dp" />-->
+
+        <!--        <ImageButton-->
+        <!--            android:id="@+id/searchBtn"-->
+        <!--            android:layout_width="40dp"-->
+        <!--            android:layout_height="40dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginLeft="5dp"-->
+        <!--            android:background="@android:color/transparent"-->
+        <!--            android:scaleType="fitXY"-->
+        <!--            android:src="@drawable/searchbeforebtn"-->
+        <!--            android:contentDescription="검색하기 버튼"/>-->
 
     </LinearLayout>
 

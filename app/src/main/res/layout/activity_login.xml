@@ -58,27 +58,28 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- 로그인 정보 기억하기 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:layout_gravity="center"
-                android:orientation="vertical">
+<!--            &lt;!&ndash; 로그인 정보 기억하기 &ndash;&gt;-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="40dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:orientation="vertical">-->
 
-                <RadioButton
-                    android:id="@+id/radioButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="로그인 정보 기억하기" />
-            </LinearLayout>
+<!--                <RadioButton-->
+<!--                    android:id="@+id/radioButton"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="로그인 정보 기억하기" />-->
+<!--            </LinearLayout>-->
 
             <!-- 로그인하기, 회원가입 버튼 포함 -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="50dp"
                 android:orientation="vertical">
 
                 <ImageButton
