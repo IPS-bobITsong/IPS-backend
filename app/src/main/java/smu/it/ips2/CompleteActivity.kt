@@ -33,6 +33,7 @@ class CompleteActivity : AppCompatActivity() {
     private var standard_sodium: Double = 0.0
     private var noticeNutrient : String = ""
     private var moreOrLess : Boolean = false
+    private var standard = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -176,21 +177,27 @@ class CompleteActivity : AppCompatActivity() {
                         noticeNutrient = compare(arr)
                         Log.d("SearchMenuActivity", "noticeNutrient: $noticeNutrient")
                         findViewById<TextView>(R.id.nutrient).text = noticeNutrient
+
                         // 과다/부족
                         var moreOrLess = findViewById<TextView>(R.id.moreOrLess)
                         if (noticeNutrient == "탄수화물") {
+                            standard = standard_carbohydrate
                             if (carbohydrate_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         } else if (noticeNutrient == "단백질") {
+                            standard = standard_protein
                             if (protein_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         } else if (noticeNutrient == "지방") {
+                            standard = standard_fat
                             if (fat_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         } else if (noticeNutrient == "당류") {
+                            standard = standard_sugars
                             if (sugars_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         } else {
+                            standard = standard_sodium
                             if (sodium_more) moreOrLess.text = "과다해요!"
                             else moreOrLess.text = "부족해요!"
                         }
@@ -237,6 +244,7 @@ class CompleteActivity : AppCompatActivity() {
             intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("nutrient", noticeNutrient)
             intent.putExtra("nutIsNeed", moreOrLess)
+            intent.putExtra("standard", standard)
             startActivity(intent)
         }
 
