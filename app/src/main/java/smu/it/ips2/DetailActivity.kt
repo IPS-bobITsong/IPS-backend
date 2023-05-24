@@ -34,38 +34,34 @@ class DetailActivity : AppCompatActivity() {
 
         firestore = FirebaseFirestore.getInstance()
         //파이어스토어 메뉴명&영양성분 불러와서 리스트로 접근
-        val menus = ArrayList<MenuList>()
-//        firestore?.collection("restaurantBook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-//            // ArrayList 비워줌
-//            menus.clear()
-//
-//            for (snapshot in querySnapshot!!.documents) {
-//                var menuname = snapshot.getString("foodname")
-//                var carbo = snapshot.getDouble("carbo")
-//                var protein = snapshot.getDouble("protein")
-//                var fat = snapshot.getDouble("fat")
-//                val menu = MenuList(menuname, carbo, protein, fat)
-//                menus.add(menu)
-//            }
-//        }
-        firestore.collection("restaurantBook").get()
-            .addOnSuccessListener { result ->
-            // ArrayList 비워줌
-            menus.clear()
+        val carbos = ArrayList<CarboList>()
+        val proteins = ArrayList<ProteinList>()
+        val fats = ArrayList<FatList>()
+        val sugars = ArrayList<SugarList>()
+        val sodiums = ArrayList<SodiumList>()
+        firestore.collection("restaurantBook").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            for (snapshot in querySnapshot!!.documents) {
+                var menuname = snapshot.getString("foodname")
+                var carbo = snapshot.getDouble("carbo")
+                var protein = snapshot.getDouble("protein")
+                var fat = snapshot.getDouble("fat")
+                var sugar = snapshot.getDouble("sugar")
+                var sodium = snapshot.getDouble("sodium")
 
-            for (document in result) {
-                var menuname = document["foodname"] as String
-                var carbo = document["carbo"] as Double
-                var protein = document["protein"]as Double
-                var fat = document["fat"]as Double
-                val menu = MenuList(menuname, carbo, protein, fat)
-                menus.add(menu)
+                menuname?.let { carbos.add(CarboList(it, carbo)) }
+                menuname?.let { proteins.add(ProteinList(it, protein)) }
+                menuname?.let { fats.add(FatList(it, fat)) }
+                menuname?.let { sugars.add(SugarList(it, sugar)) }
+                menuname?.let { sodiums.add(SodiumList(it, sodium)) }
+
             }
         }
 
-        val sortedCarbo = menus.sortedByDescending { it.carbo!! }
-        val sortedProtein = menus.sortedByDescending { it.protein!! }
-        val sortedFat = menus.sortedByDescending { it.fat!! }
+        val sortedCarbo = carbos.sortedByDescending { it.carbo!! }
+        val sortedProtein = proteins.sortedByDescending { it.protein!! }
+        val sortedFat = fats.sortedByDescending { it.fat!! }
+        val sortedSugar = sugars.sortedByDescending { it.sugar!! }
+        val sortedSodium = sodiums.sortedByDescending { it.sodium!! }
 
         if (needNutrient == "탄수화물") {
             findViewById<Button>(R.id.buttonRecommend1).text = sortedCarbo[0].menuname
@@ -76,10 +72,16 @@ class DetailActivity : AppCompatActivity() {
         }else if (needNutrient == "지방") {
             findViewById<Button>(R.id.buttonRecommend1).text = sortedFat[0].menuname
             findViewById<Button>(R.id.buttonRecommend2).text = sortedFat[1].menuname
+        }else if (needNutrient == "당") {
+            findViewById<Button>(R.id.buttonRecommend1).text = sortedSugar[0].menuname
+            findViewById<Button>(R.id.buttonRecommend2).text = sortedSugar[1].menuname
+        }else if (needNutrient == "나트륨") {
+            findViewById<Button>(R.id.buttonRecommend1).text = sortedSodium[0].menuname
+            findViewById<Button>(R.id.buttonRecommend2).text = sortedSodium[1].menuname
         }
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
-            intent = Intent(this, CompleteActivity::class.java)
+            intent = Intent(this, SearchRestaurantActivity::class.java)
             startActivity(intent)
         }
 
@@ -89,6 +91,10 @@ class DetailActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.homeBtn).setOnClickListener {
+            intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        findViewById<ImageButton>(R.id.checkBtn).setOnClickListener {
             intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
