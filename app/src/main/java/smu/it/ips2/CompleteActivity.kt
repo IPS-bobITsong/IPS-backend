@@ -117,30 +117,30 @@ class CompleteActivity : AppCompatActivity() {
                         var sodium_more: Boolean = true
                         // 영양소 / 기준 계산 후 차이값 계산하기
                         if (standard_carbohydrate > u_carbohydrate) {
-                            r_carbohydrate = u_carbohydrate / standard_carbohydrate
+                            r_carbohydrate = (standard_carbohydrate - u_carbohydrate) / standard_carbohydrate
                             carbohydrate_more = false
                         }
-                        else r_carbohydrate = standard_carbohydrate / u_carbohydrate
+                        else r_carbohydrate = (u_carbohydrate - standard_carbohydrate) / standard_carbohydrate
                         if (standard_protein > u_protein) {
-                            r_protein = u_protein / standard_protein
+                            r_protein = (standard_protein - u_protein) / standard_protein
                             protein_more = false
                         }
-                        else r_protein = standard_protein / u_protein
+                        else r_protein = (u_protein - standard_protein) / standard_protein
                         if (standard_fat > u_fat) {
-                            r_fat = u_fat / standard_fat
+                            r_fat = (standard_fat - u_fat) / standard_fat
                             fat_more = false
                         }
-                        else r_fat = standard_fat / u_fat
+                        else r_fat = (u_fat - standard_fat) / standard_fat
                         if (standard_sugars > u_sugars) {
-                            r_sugars = u_sugars / standard_sugars
+                            r_sugars = (standard_sugars - u_sugars) / standard_sugars
                             sugars_more = false
                         }
-                        else r_sugars = standard_sugars / u_sugars
+                        else r_sugars = (u_sugars - standard_sugars) / standard_sugars
                         if (standard_sodium > u_sodium) {
-                            r_sodium = u_sodium / standard_sodium
+                            r_sodium = (standard_sodium - u_sodium) / standard_sodium
                             sodium_more = false
                         }
-                        else r_sodium = standard_sodium / u_sodium
+                        else r_sodium = (u_sodium - standard_sodium) / standard_sodium
 //                        //기준-영양소 계산 후 절댓값 씌우기
 //                        val a_carbohydrate = Math.abs(r_carbohydrate!!)
 //                        val a_protein = Math.abs(r_protein!!)
