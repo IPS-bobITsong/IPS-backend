@@ -39,7 +39,7 @@ class DetailActivity : AppCompatActivity() {
         val fats = ArrayList<FatList>()
         val sugars = ArrayList<SugarList>()
         val sodiums = ArrayList<SodiumList>()
-        firestore?.collection("restaurantBook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+        firestore.collection("restaurantBook").addSnapshotListener { querySnapshot, firebaseFirestoreException ->
             for (snapshot in querySnapshot!!.documents) {
                 var menuname = snapshot.getString("foodname")
                 var carbo = snapshot.getDouble("carbo")
