@@ -44,7 +44,9 @@ class DetailActivity : AppCompatActivity() {
                 var carbo = snapshot.getDouble("carbo")
                 var protein = snapshot.getDouble("protein")
                 var fat = snapshot.getDouble("fat")
-                val menu = MenuList(menuname, carbo, protein, fat)
+                var sugar = snapshot.getDouble("sugar")
+                var sodium = snapshot.getDouble("sodium")
+                val menu = MenuList(menuname, carbo, protein, fat, sugar, sodium)
                 menus.add(menu)
             }
         }
@@ -52,6 +54,8 @@ class DetailActivity : AppCompatActivity() {
         val sortedCarbo = menus.sortedByDescending { it.carbo!! }
         val sortedProtein = menus.sortedByDescending { it.protein!! }
         val sortedFat = menus.sortedByDescending { it.fat!! }
+        val sortedSugar = menus.sortedByDescending { it.sugar!! }
+        val sortedSodium = menus.sortedByDescending { it.sodium!! }
 
         if (needNutrient == "탄수화물") {
             findViewById<Button>(R.id.buttonRecommend1).text = sortedCarbo[0].menuname
@@ -62,6 +66,12 @@ class DetailActivity : AppCompatActivity() {
         }else if (needNutrient == "지방") {
             findViewById<Button>(R.id.buttonRecommend1).text = sortedFat[0].menuname
             findViewById<Button>(R.id.buttonRecommend2).text = sortedFat[1].menuname
+        }else if (needNutrient == "당") {
+            findViewById<Button>(R.id.buttonRecommend1).text = sortedSugar[0].menuname
+            findViewById<Button>(R.id.buttonRecommend2).text = sortedSugar[1].menuname
+        }else if (needNutrient == "나트륨") {
+            findViewById<Button>(R.id.buttonRecommend1).text = sortedSodium[0].menuname
+            findViewById<Button>(R.id.buttonRecommend2).text = sortedSodium[1].menuname
         }
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
