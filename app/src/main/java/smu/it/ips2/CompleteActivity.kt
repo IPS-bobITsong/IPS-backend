@@ -214,12 +214,12 @@ class CompleteActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        findViewById<ImageButton>(R.id.nextBtn).setOnClickListener {
-//            intent = Intent(this, DetailActivity::class.java)
-//            intent.putExtra("nutrient", noticeNutrient)
-////            intent.putExtra("needtext", needText.text)
-//            startActivity(intent)
-//        }
+        findViewById<ImageButton>(R.id.nextBtn).setOnClickListener {
+            intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("nutrient", noticeNutrient)
+//            intent.putExtra("needtext", needText.text)
+            startActivity(intent)
+        }
 
         val database = FirebaseDatabase.getInstance()
 
