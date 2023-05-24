@@ -3,6 +3,7 @@ package smu.it.ips2
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.firebase.auth.FirebaseAuth
@@ -138,6 +139,7 @@ class MyPageActivity : AppCompatActivity() {
             .addOnSuccessListener { querySnapshot ->
                 val menuBookCount = querySnapshot.size()
                 Log.d("SearchMenuActivity", "MenuBook Count: $menuBookCount")
+                findViewById<TextView>(R.id.myDiet).text = menuBookCount.toString()
                 val levelRef = database.getReference("users").child(userId.toString()).child("level")
                 when {
                     menuBookCount >= 60 -> {

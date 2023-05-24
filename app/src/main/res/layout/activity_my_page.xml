@@ -118,13 +118,66 @@
 
         </LinearLayout>
 
-        <!-- 포인트, 건강 레벨 -->
+        <!-- 식단, 포인트, 건강 레벨 -->
         <LinearLayout
             android:background="@color/titleBar"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <!--식단-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:textStyle="bold"
+                    android:textSize="8pt"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="나의 식단"/>
+
+                <!-- 식단 표시 -->
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <!-- 식단 불러오기 -->
+                    <TextView
+                        android:id="@+id/myDiet"
+                        android:text="---"
+                        android:textStyle="bold"
+                        android:textSize="10pt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:text="개"
+                        android:textStyle="bold"
+                        android:textSize="8pt"
+                        android:layout_marginLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 구분선 -->
+            <LinearLayout
+                android:background="@color/white"
+                android:layout_margin="10dp"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"/>
+
 
             <!-- 포인트 -->
             <LinearLayout
@@ -246,31 +299,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:textStyle="bold"
-                    android:textSize="8pt"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="나의 식단"/>
-                <TextView
-                    android:id="@+id/myDiet"
-                    android:textStyle="bold"
-                    android:textSize="8pt"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:layout_marginTop="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
 
         </LinearLayout>
 
