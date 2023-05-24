@@ -7,7 +7,7 @@
     android:layout_height="200dp"
     android:background="#eeeeee"
     android:layout_gravity="center"
-    tools:context=".ChangeInfoPopActivity">
+    tools:context=".GiftPopFailedActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,46 +33,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="회원 정보를"
+                android:text="교환권 다운로드 실패!"
                 android:textSize="10pt"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="수정하시겠습니까?"
+                android:layout_marginTop="5dp"
+                android:text="포인트를 더 모아주세요~"
                 android:textSize="10pt"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_margin="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:id="@+id/applyYesBtn"
-                android:src="@drawable/rememberyesbtn"
-                android:scaleType="fitXY"
-                android:background="@android:color/transparent"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"/>
-
-            <ImageButton
-                android:id="@+id/applyNoBtn"
-                android:src="@drawable/remembernobtn"
-                android:scaleType="fitXY"
-                android:background="@android:color/transparent"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:layout_marginLeft="20dp" />
-
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/checkBtn"
+            android:src="@drawable/checkbtn"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:contentDescription="확인 버튼"/>
 
     </LinearLayout>
 

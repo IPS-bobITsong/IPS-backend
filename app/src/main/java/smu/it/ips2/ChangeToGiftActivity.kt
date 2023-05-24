@@ -21,6 +21,8 @@ class ChangeToGiftActivity : AppCompatActivity() {
         val userId = currentUser?.uid
         val database = FirebaseDatabase.getInstance()
 
+        var userPoint: String? = ""
+
         database.getReference("users/$userId/name").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val userName = snapshot.getValue(String::class.java)
@@ -40,7 +42,7 @@ class ChangeToGiftActivity : AppCompatActivity() {
 
         database.getReference("users/$userId/point").addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val userPoint = snapshot.getValue(String::class.java)
+                userPoint = snapshot.getValue(String::class.java)
 
                 val userPointTextView = findViewById<TextView>(R.id.point)
 
@@ -54,6 +56,7 @@ class ChangeToGiftActivity : AppCompatActivity() {
             }
         })
 
+
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
             intent = Intent(this, MyPageActivity::class.java)
             startActivity(intent)
@@ -64,10 +67,35 @@ class ChangeToGiftActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // 상품 버튼들 클릭하면 테두리 색상 바뀌게
+        findViewById<ImageButton>(R.id.gift_icecream).setOnClickListener {
+            if (userPoint!!.toInt() >= 400) {
+                intent = Intent(this, GiftPopActivity::class.java)
+                intent.putExtra("giftName", "BR 싱글레귤러 컵/콘")
+            } else intent = Intent(this, GiftPopFailedActivity::class.java)
+            startActivity(intent)
+        }
 
-        findViewById<ImageButton>(R.id.downloadBtn).setOnClickListener {
-            intent = Intent(this, GiftPopActivity::class.java)
+        findViewById<ImageButton>(R.id.gift_coffee).setOnClickListener {
+            if (userPoint!!.toInt() >= 400) {
+                intent = Intent(this, GiftPopActivity::class.java)
+                intent.putExtra("giftName", "컴포즈 커피 3000원")
+            } else intent = Intent(this, GiftPopFailedActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<ImageButton>(R.id.gift_bubbletea).setOnClickListener {
+            if (userPoint!!.toInt() >= 400) {
+                intent = Intent(this, GiftPopActivity::class.java)
+                intent.putExtra("giftName", "아마스빈 3000원")
+            } else intent = Intent(this, GiftPopFailedActivity::class.java)
+            startActivity(intent)
+        }
+
+        findViewById<ImageButton>(R.id.gift_gs).setOnClickListener {
+            if (userPoint!!.toInt() >= 400) {
+                intent = Intent(this, GiftPopActivity::class.java)
+                intent.putExtra("giftName", "GS25 3000원")
+            } else intent = Intent(this, GiftPopFailedActivity::class.java)
             startActivity(intent)
         }
     }

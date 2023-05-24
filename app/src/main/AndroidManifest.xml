@@ -13,6 +13,9 @@
         android:theme="@style/Theme.IPS"
         tools:targetApi="31">
         <activity
+            android:name=".GiftPopFailedActivity"
+            android:theme="@style/Theme.MyDialog" />
+        <activity
             android:name=".QuizSchoolActivity"
             android:exported="false" />
         <activity
@@ -24,15 +27,6 @@
         <activity
             android:name=".QuizBrainActivity"
             android:exported="false" />
-        <activity
-            android:name=".CheckMyInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CheckDietActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ChangeInfoPopActivity"
-            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name=".SplashActivity"
             android:exported="true">
@@ -102,9 +96,6 @@
         <activity
             android:name=".JoinActivity"
             android:exported="false" />
-        <activity
-            android:name=".LoginPopActivity"
-            android:theme="@style/Theme.MyDialog" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />

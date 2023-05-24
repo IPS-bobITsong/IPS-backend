@@ -194,23 +194,8 @@ class MyPageActivity : AppCompatActivity() {
             }
 
 
-        // 이전 화면으로 이동
-        binding.backBtn.setOnClickListener {
-
-        }
-
         binding.homeBtn.setOnClickListener {
             intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.checkMyInfoBtn.setOnClickListener {
-            intent = Intent(this, CheckMyInfoActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.checkDietBtn.setOnClickListener {
-            intent = Intent(this, CheckDietActivity::class.java)
             startActivity(intent)
         }
 

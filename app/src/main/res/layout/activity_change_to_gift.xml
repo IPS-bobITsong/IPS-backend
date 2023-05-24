@@ -166,20 +166,51 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:text="현재 포인트로 교환 가능한 아이템입니다"
+                android:layout_marginTop="10dp"
+                android:text="기프티콘 다운로드는"
                 android:textSize="8pt"
                 android:textStyle="bold" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="포인트가 "
+                    android:textSize="8pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="400p"
+                    android:textColor="#FF3D3D"
+                    android:textSize="8pt"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 차감됩니다!"
+                    android:textSize="8pt"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="원하는 상퓸을 클릭하고 다운로드 버튼을 눌러주세요" />
+                android:text="원하는 상퓸을 클릭해서 다운로드 하세요" />
 
             <!-- 교환권 -->
             <LinearLayout
@@ -188,51 +219,46 @@
                 android:layout_margin="10dp">
 
                 <ImageButton
-                    android:id="@+id/gift1Btn"
+                    android:id="@+id/gift_icecream"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/giftsample" />
+                    android:src="@drawable/gifticon1" />
 
                 <ImageButton
-                    android:id="@+id/gift2Btn"
+                    android:id="@+id/gift_coffee"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/giftsample" />
+                    android:src="@drawable/gifticon2" />
 
                 <ImageButton
-                    android:id="@+id/gift3Btn"
+                    android:id="@+id/gift_bubbletea"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/giftsample" />
+                    android:src="@drawable/gifticon3" />
 
                 <ImageButton
-                    android:id="@+id/gift4Btn"
+                    android:id="@+id/gift_gs"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
+                    android:padding="5dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/giftsample" />
+                    android:src="@drawable/gifticon4" />
 
             </LinearLayout>
-
-            <ImageButton
-                android:id="@+id/downloadBtn"
-                android:src="@drawable/downloadbtn"
-                android:scaleType="fitXY"
-                android:background="@android:color/transparent"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginBottom="15dp" />
 
         </LinearLayout>
 
