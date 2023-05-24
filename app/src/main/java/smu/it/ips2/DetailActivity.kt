@@ -25,12 +25,13 @@ class DetailActivity : AppCompatActivity() {
         val noticeMessage = intent.getStringExtra("nutIsNeed")
         if (noticeMessage == "부족해요!") {
             findViewById<TextView>(R.id.moreOrLess).text = "늘려보세요!"
-            findViewById<TextView>(R.id.textViewNotice).text = "함량이 많은 메뉴 둘러보기"
+            //findViewById<TextView>(R.id.textViewNotice).text = "함량이 많은 메뉴 둘러보기"
         } else if (noticeMessage == "과다해요!") {
             findViewById<TextView>(R.id.moreOrLess).text = "줄여보세요!"
-            findViewById<TextView>(R.id.textViewNotice).text = "함량이 적은 메뉴 둘러보기"
+            //findViewById<TextView>(R.id.textViewNotice).text = "함량이 적은 메뉴 둘러보기"
         }
 
+        // findViewById<TextView>(R.id.textViewNotice).text = "메뉴 둘러보기"
 
         firestore = FirebaseFirestore.getInstance()
         //파이어스토어 메뉴명&영양성분 불러와서 리스트로 접근
@@ -62,32 +63,32 @@ class DetailActivity : AppCompatActivity() {
                 val sortedSugar = sugars.sortedByDescending { it.sugar!! }
                 val sortedSodium = sodiums.sortedByDescending { it.sodium!! }
 
-                if (needNutrient == "탄수화물") {
-                    findViewById<Button>(R.id.buttonRecommend1).text =
-                        sortedCarbo.getOrNull(0)?.menuname
-                    findViewById<Button>(R.id.buttonRecommend2).text =
-                        sortedCarbo.getOrNull(1)?.menuname
-                } else if (needNutrient == "단백질") {
-                    findViewById<Button>(R.id.buttonRecommend1).text =
-                        sortedProtein.getOrNull(0)?.menuname
-                    findViewById<Button>(R.id.buttonRecommend2).text =
-                        sortedProtein.getOrNull(1)?.menuname
-                } else if (needNutrient == "지방") {
-                    findViewById<Button>(R.id.buttonRecommend1).text =
-                        sortedFat.getOrNull(0)?.menuname
-                    findViewById<Button>(R.id.buttonRecommend2).text =
-                        sortedFat.getOrNull(1)?.menuname
-                } else if (needNutrient == "당") {
-                    findViewById<Button>(R.id.buttonRecommend1).text =
-                        sortedSugar.getOrNull(0)?.menuname
-                    findViewById<Button>(R.id.buttonRecommend2).text =
-                        sortedSugar.getOrNull(1)?.menuname
-                } else if (needNutrient == "나트륨") {
-                    findViewById<Button>(R.id.buttonRecommend1).text =
-                        sortedSodium.getOrNull(0)?.menuname
-                    findViewById<Button>(R.id.buttonRecommend2).text =
-                        sortedSodium.getOrNull(1)?.menuname
-                }
+//                if (needNutrient == "탄수화물") {
+//                    findViewById<Button>(R.id.buttonRecommend1).text =
+//                        sortedCarbo.getOrNull(0)?.menuname
+//                    findViewById<Button>(R.id.buttonRecommend2).text =
+//                        sortedCarbo.getOrNull(1)?.menuname
+//                } else if (needNutrient == "단백질") {
+//                    findViewById<Button>(R.id.buttonRecommend1).text =
+//                        sortedProtein.getOrNull(0)?.menuname
+//                    findViewById<Button>(R.id.buttonRecommend2).text =
+//                        sortedProtein.getOrNull(1)?.menuname
+//                } else if (needNutrient == "지방") {
+//                    findViewById<Button>(R.id.buttonRecommend1).text =
+//                        sortedFat.getOrNull(0)?.menuname
+//                    findViewById<Button>(R.id.buttonRecommend2).text =
+//                        sortedFat.getOrNull(1)?.menuname
+//                } else if (needNutrient == "당") {
+//                    findViewById<Button>(R.id.buttonRecommend1).text =
+//                        sortedSugar.getOrNull(0)?.menuname
+//                    findViewById<Button>(R.id.buttonRecommend2).text =
+//                        sortedSugar.getOrNull(1)?.menuname
+//                } else if (needNutrient == "나트륨") {
+//                    findViewById<Button>(R.id.buttonRecommend1).text =
+//                        sortedSodium.getOrNull(0)?.menuname
+//                    findViewById<Button>(R.id.buttonRecommend2).text =
+//                        sortedSodium.getOrNull(1)?.menuname
+//                }
 //        }.addOnFailureListener { exception ->
 //            // 오류 처리 코드
 //        }
@@ -122,27 +123,27 @@ class DetailActivity : AppCompatActivity() {
     private fun getCardNews(needNutrient: String?): ArrayList<Int> {
         return when (needNutrient) {
             "탄수화물" -> arrayListOf(
-                R.drawable.carbohydrate_article1,
-                R.drawable.carbohydrate_article2,
-                R.drawable.carbohydrate_article3
+                R.drawable.carbo1,
+                R.drawable.carbo2,
+                R.drawable.carbo3
             )
 
             "단백질" -> arrayListOf(
-                R.drawable.protein_article1,
-                R.drawable.protein_article2,
-                R.drawable.protein_article3
+                R.drawable.protein1,
+                R.drawable.protein2,
+                R.drawable.protein3
             )
 
             "지방" -> arrayListOf(
-                R.drawable.fat_article1,
-                R.drawable.fat_article2,
-                R.drawable.fat_article3
+                R.drawable.fat1,
+                R.drawable.fat2,
+                R.drawable.fat3
             )
 
-            "당" -> arrayListOf(
-                R.drawable.sugars_article1,
-                R.drawable.sugars_article2,
-                R.drawable.sugars_article3
+            "당류" -> arrayListOf(
+                R.drawable.sugars1,
+                R.drawable.sugars2,
+                R.drawable.sugars3
             )
 
             "나트륨" -> arrayListOf(

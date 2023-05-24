@@ -17,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class CompleteActivity : AppCompatActivity() {
     private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    lateinit var firestore : FirebaseFirestore
+    //lateinit var firestore : FirebaseFirestore
 
     private var u_menuName: String = ""
     private var u_carbohydrate: Double = 0.0
@@ -293,12 +293,12 @@ class CompleteActivity : AppCompatActivity() {
 //        }
     }
 
-    fun setText(result: Double): String{
-        return when {
-            result > 0 -> "부족해요!"
-            result < 0 -> "과다해요!"
-            else -> ""
-        }
-    }
+//    fun setText(result: Double): String{
+//        return when {
+//            result > 0 -> "부족해요!"
+//            result < 0 -> "과다해요!"
+//            else -> ""
+//        }
+//    }
 
 }
