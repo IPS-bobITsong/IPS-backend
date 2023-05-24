@@ -8,17 +8,18 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 
 class CompleteActivity : AppCompatActivity() {
-    private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    lateinit var firestore : FirebaseFirestore
-    private var ENTER_DIET = 0
+    private lateinit var database: FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firestore: FirebaseFirestore
 
     var standard_carbohydrate: Double = 0.0
     var standard_protein: Double = 0.0
@@ -32,17 +33,18 @@ class CompleteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_complete)
 
-        ENTER_DIET += 1
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        firestore = FirebaseFirestore.getInstance()
 
         //사용자 나이에 따라 기준 영양소 세팅
         val currentUser = auth.currentUser
         val userId = currentUser?.uid
         if (userId != null) {
             database.getReference("users").child(userId).child("age")
-                .addListenerForSingleValueEvent(object :
-                    ValueEventListener {
+                .addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
-                        val age = dataSnapshot.getValue(String::class.java)?.toInt()
+                        var age = dataSnapshot.getValue(String::class.java)?.toInt()
                         if (age != null) {
                             if (age in 1 until 3) {
                                 standard_carbohydrate = 43.33
@@ -78,7 +80,7 @@ class CompleteActivity : AppCompatActivity() {
         }
 
         // 파이어스토어 인스턴스 초기화
-        firestore = FirebaseFirestore.getInstance()
+
         firestore.collection("users").document(userId.toString())
             .collection("menubook")
             .get()
@@ -182,9 +184,6 @@ class CompleteActivity : AppCompatActivity() {
         lev.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val currentValue = dataSnapshot.getValue(String::class.java) // 현재 값 가져오기
-                for (i in 1 until 6) {
-                    if (ENTER_DIET == 15 || ENTER_DIET == 30 || ENTER_DIET == 45 || ENTER_DIET == 60 || ENTER_DIET == 75) {
-
                         // 현재 값에서 변화시킬 작업 수행
                         val newValue = (currentValue?.toIntOrNull() ?: 0) + 1
 
@@ -203,8 +202,6 @@ class CompleteActivity : AppCompatActivity() {
                                 // 수정 실패
                                 // 오류 처리 수행 or 메시지 표시 가능
                             }
-                    }
-                }
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 // 읽기 실패 처리
