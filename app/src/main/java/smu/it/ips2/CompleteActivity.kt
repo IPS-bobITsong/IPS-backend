@@ -31,6 +31,8 @@ class CompleteActivity : AppCompatActivity() {
     private var standard_fat: Double = 0.0
     private var standard_sugars: Double = 0.0
     private var standard_sodium: Double = 0.0
+    private var noticeNutrient : String = ""
+    private var moreOrLess : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,9 +103,13 @@ class CompleteActivity : AppCompatActivity() {
                                 standard_sugars = 15.0
                                 standard_sodium = 500.0
                             }
-                            Log.d("SearchMenuActivity", "standard_fat11: $standard_fat")
+                            Log.d("SearchMenuActivity", "standard_carbohydrate: $standard_carbohydrate")
+                            Log.d("SearchMenuActivity", "standard_protein: $standard_protein")
+                            Log.d("SearchMenuActivity", "standard_fat: $standard_fat")
+                            Log.d("SearchMenuActivity", "standard_sugars: $standard_sugars")
+                            Log.d("SearchMenuActivity", "standard_sodium: $standard_sodium")
                         }
-                        Log.d("SearchMenuActivity", "s_fat12: $standard_fat")
+//                        Log.d("SearchMenuActivity", "s_fat12: $standard_fat")
                         var r_carbohydrate: Double = 0.0
                         var r_protein: Double = 0.0
                         var r_fat: Double = 0.0
@@ -120,22 +126,30 @@ class CompleteActivity : AppCompatActivity() {
                             r_carbohydrate = (standard_carbohydrate - u_carbohydrate) / standard_carbohydrate
                             carbohydrate_more = false
                         }
-                        else r_carbohydrate = (u_carbohydrate - standard_carbohydrate) / standard_carbohydrate
+                        else {
+                            r_carbohydrate = (u_carbohydrate - standard_carbohydrate) / standard_carbohydrate
+                        }
                         if (standard_protein > u_protein) {
                             r_protein = (standard_protein - u_protein) / standard_protein
                             protein_more = false
                         }
-                        else r_protein = (u_protein - standard_protein) / standard_protein
+                        else {
+                            r_protein = (u_protein - standard_protein) / standard_protein
+                        }
                         if (standard_fat > u_fat) {
                             r_fat = (standard_fat - u_fat) / standard_fat
                             fat_more = false
                         }
-                        else r_fat = (u_fat - standard_fat) / standard_fat
+                        else {
+                            r_fat = (u_fat - standard_fat) / standard_fat
+                        }
                         if (standard_sugars > u_sugars) {
                             r_sugars = (standard_sugars - u_sugars) / standard_sugars
                             sugars_more = false
                         }
-                        else r_sugars = (u_sugars - standard_sugars) / standard_sugars
+                        else {
+                            r_sugars = (u_sugars - standard_sugars) / standard_sugars
+                        }
                         if (standard_sodium > u_sodium) {
                             r_sodium = (standard_sodium - u_sodium) / standard_sodium
                             sodium_more = false
@@ -147,14 +161,19 @@ class CompleteActivity : AppCompatActivity() {
 //                        val a_fat = Math.abs(r_fat!!)
 //                        val a_sugars = Math.abs(r_sugars!!)
 //                        val a_sodium = Math.abs(r_sodium!!)
-                        Log.d("SearchMenuActivity", "a_carbo: $r_carbohydrate")
-                        Log.d("SearchMenuActivity", "a_protein: $r_protein")
-                        Log.d("SearchMenuActivity", "a_fat: $r_fat")
-                        Log.d("SearchMenuActivity", "a_sugars: $r_sugars")
-                        Log.d("SearchMenuActivity", "a_sodium: $r_sodium")
+                        Log.d("SearchMenuActivity", "r_carbo: $r_carbohydrate")
+                        Log.d("SearchMenuActivity", "carbo_more: $carbohydrate_more")
+                        Log.d("SearchMenuActivity", "r_protein: $r_protein")
+                        Log.d("SearchMenuActivity", "protein_more: $protein_more")
+                        Log.d("SearchMenuActivity", "r_fat: $r_fat")
+                        Log.d("SearchMenuActivity", "fat_more: $fat_more")
+                        Log.d("SearchMenuActivity", "r_sugars: $r_sugars")
+                        Log.d("SearchMenuActivity", "sugars_more: $sugars_more")
+                        Log.d("SearchMenuActivity", "r_sodium: $r_sodium")
+                        Log.d("SearchMenuActivity", "sodium_more: $sodium_more")
                         //차이값 가장 큰 영양소 나타내기
                         val arr:Array<Double> = arrayOf(r_carbohydrate, r_protein, r_fat, r_sugars, r_sodium)
-                        val noticeNutrient = compare(arr)
+                        noticeNutrient = compare(arr)
                         Log.d("SearchMenuActivity", "noticeNutrient: $noticeNutrient")
                         findViewById<TextView>(R.id.nutrient).text = noticeNutrient
                         // 과다/부족
@@ -214,12 +233,12 @@ class CompleteActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-//        findViewById<ImageButton>(R.id.nextBtn).setOnClickListener {
-//            intent = Intent(this, DetailActivity::class.java)
-//            intent.putExtra("nutrient", noticeNutrient)
-////            intent.putExtra("needtext", needText.text)
-//            startActivity(intent)
-//        }
+        findViewById<ImageButton>(R.id.nextBtn).setOnClickListener {
+            intent = Intent(this, DetailActivity::class.java)
+            intent.putExtra("nutrient", noticeNutrient)
+            intent.putExtra("nutIsNeed", moreOrLess)
+            startActivity(intent)
+        }
 
         val database = FirebaseDatabase.getInstance()
 
