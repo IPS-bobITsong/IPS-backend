@@ -116,11 +116,11 @@
         <!-- 카드 뉴스 -->
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/cardNews"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_gravity="center"/>
+            android:layout_marginBottom="20dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -128,14 +128,14 @@
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-<!--            <TextView-->
-<!--                android:id="@+id/textViewNoticeNutrient"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="나트륨"-->
-<!--                android:textColor="#ff0000"-->
-<!--                android:textSize="10pt"-->
-<!--                android:textStyle="bold" />-->
+            <!--            <TextView-->
+            <!--                android:id="@+id/textViewNoticeNutrient"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="나트륨"-->
+            <!--                android:textColor="#ff0000"-->
+            <!--                android:textSize="10pt"-->
+            <!--                android:textStyle="bold" />-->
 
             <TextView
                 android:id="@+id/textViewNotice"
@@ -150,31 +150,42 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:background="@color/titleBar"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/buttonRecommend"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:backgroundTint="@color/titleBar"
-                android:text="[가맹점]\n샐러드"
+            <TextView
+                android:id="@+id/restaurantName"
+                android:text="가맹점"
                 android:textColor="@color/black"
                 android:textSize="10pt"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-<!--            <Button-->
-<!--                android:id="@+id/buttonRecommend2"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:backgroundTint="@color/titleBar"-->
-<!--                android:text="[가맹점 2]\n컵밥"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:textSize="10pt"-->
-<!--                android:textStyle="bold" />-->
+            <TextView
+                android:id="@+id/foodName"
+                android:text="추천 메뉴"
+                android:textColor="@color/black"
+                android:textSize="10pt"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <!--            <Button-->
+            <!--                android:id="@+id/buttonRecommend2"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginLeft="10dp"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:backgroundTint="@color/titleBar"-->
+            <!--                android:text="[가맹점 2]\n컵밥"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="10pt"-->
+            <!--                android:textStyle="bold" />-->
 
         </LinearLayout>
 
