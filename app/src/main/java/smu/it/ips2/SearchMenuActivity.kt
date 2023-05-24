@@ -18,14 +18,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class SearchMenuActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
-    private val selectedMenu = mutableListOf<MenuBook>()
 
     private lateinit var recyclerView : RecyclerView
 
     private lateinit var recyclerViewAdapter : SearchMenuActivity.RecyclerViewAdapter
-    private lateinit var recyclerViewAdapter2 : SelectedRVAdapter
-
-    private lateinit var searchQuery: String
 
 
     @SuppressLint("MissingInflatedId")
@@ -50,15 +46,6 @@ class SearchMenuActivity : AppCompatActivity() {
         var selectedRes = findViewById<TextView>(R.id.selected)
         selectedRes.text = intent.getStringExtra("resname")
 
-//        // 메뉴 검색 결과 아래에 뜨도록
-//        findViewById<ImageButton>(R.id.searchBtn).setOnClickListener {
-//            // 검색 버튼 클릭 시, 사용자의 검색어를 가져와서 searchQuery 변수에 저장
-//            val searchEditText = findViewById<EditText>(R.id.inputMenu)
-//            searchQuery = searchEditText.text.toString()
-//
-//            // 검색어를 사용하여 RecyclerViewAdapter의 filter 메소드 호출
-//            recyclerViewAdapter.filter(searchQuery)
-//        }
 
         // 파이어스토어 인스턴스 초기화
         firestore = FirebaseFirestore.getInstance()
@@ -168,53 +155,6 @@ class SearchMenuActivity : AppCompatActivity() {
 
         }
 
-        // 검색 기능 구현
-        fun filter(query: String) {
-            val lowerCaseQuery = query.toLowerCase()
-
-            filteredDataList.clear()
-            if (lowerCaseQuery.isEmpty()) {
-                filteredDataList.addAll(menuDataList)
-            } else {
-                for (menu in menuDataList) {
-                    if (menu.foodname?.toLowerCase()?.contains(lowerCaseQuery) == true) {
-                        filteredDataList.add(menu)
-                    }
-                }
-            }
-
-            menuDataList = filteredDataList
-
-            notifyDataSetChanged()
-        }
-
-        // 선택된 메뉴 반환
-        fun getSelectedMenu(): List<MenuBook> {
-            val selectedMenu = ArrayList<MenuBook>()
-
-            for (menu in menuDataList) {
-                if (menu.isSelected) {
-                    selectedMenu.add(menu)
-                }
-            }
-
-            return selectedMenu
-        }
-
-        // 메뉴 데이터 설정 및 초기화
-        fun setData(dataList: ArrayList<MenuBook>) {
-            menuDataList = dataList
-            filteredDataList.clear()
-            filteredDataList.addAll(menuDataList)
-            notifyDataSetChanged()
-        }
-
-//        // 데이터 업데이트 메소드
-//        fun updateData(newMenuDataList: List<MenuBook>) {
-//            menuDataList.clear()
-//            menuDataList.addAll(newMenuDataList)
-//            notifyDataSetChanged()
-//        }
 
     }
 

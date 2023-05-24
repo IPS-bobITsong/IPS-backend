@@ -17,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 class CompleteActivity : AppCompatActivity() {
     private var database: FirebaseDatabase = FirebaseDatabase.getInstance()
     private var auth: FirebaseAuth = FirebaseAuth.getInstance()
-    //lateinit var firestore : FirebaseFirestore
 
     private var u_menuName: String = ""
     private var u_carbohydrate: Double = 0.0
@@ -156,12 +155,7 @@ class CompleteActivity : AppCompatActivity() {
                             sodium_more = false
                         }
                         else r_sodium = (u_sodium - standard_sodium) / standard_sodium
-//                        //기준-영양소 계산 후 절댓값 씌우기
-//                        val a_carbohydrate = Math.abs(r_carbohydrate!!)
-//                        val a_protein = Math.abs(r_protein!!)
-//                        val a_fat = Math.abs(r_fat!!)
-//                        val a_sugars = Math.abs(r_sugars!!)
-//                        val a_sodium = Math.abs(r_sodium!!)
+//
                         Log.d("SearchMenuActivity", "r_carbo: $r_carbohydrate")
                         Log.d("SearchMenuActivity", "carbo_more: $carbohydrate_more")
                         Log.d("SearchMenuActivity", "r_protein: $r_protein")
@@ -172,6 +166,7 @@ class CompleteActivity : AppCompatActivity() {
                         Log.d("SearchMenuActivity", "sugars_more: $sugars_more")
                         Log.d("SearchMenuActivity", "r_sodium: $r_sodium")
                         Log.d("SearchMenuActivity", "sodium_more: $sodium_more")
+
                         //차이값 가장 큰 영양소 나타내기
                         val arr:Array<Double> = arrayOf(r_carbohydrate, r_protein, r_fat, r_sugars, r_sodium)
                         noticeNutrient = compare(arr)
@@ -179,28 +174,30 @@ class CompleteActivity : AppCompatActivity() {
                         findViewById<TextView>(R.id.nutrient).text = noticeNutrient
 
                         // 과다/부족
-                        var moreOrLess = findViewById<TextView>(R.id.moreOrLess)
+                        var moreOrLess = ""
                         if (noticeNutrient == "탄수화물") {
                             standard = standard_carbohydrate
-                            if (carbohydrate_more) moreOrLess.text = "과다해요!"
-                            else moreOrLess.text = "부족해요!"
+                            if (carbohydrate_more) moreOrLess = "과다해요!"
+                            else moreOrLess = "부족해요!"
                         } else if (noticeNutrient == "단백질") {
                             standard = standard_protein
-                            if (protein_more) moreOrLess.text = "과다해요!"
-                            else moreOrLess.text = "부족해요!"
+                            if (protein_more) moreOrLess = "과다해요!"
+                            else moreOrLess = "부족해요!"
                         } else if (noticeNutrient == "지방") {
                             standard = standard_fat
-                            if (fat_more) moreOrLess.text = "과다해요!"
-                            else moreOrLess.text = "부족해요!"
+                            if (fat_more) moreOrLess = "과다해요!"
+                            else moreOrLess = "부족해요!"
                         } else if (noticeNutrient == "당류") {
                             standard = standard_sugars
-                            if (sugars_more) moreOrLess.text = "과다해요!"
-                            else moreOrLess.text = "부족해요!"
+                            if (sugars_more) moreOrLess = "과다해요!"
+                            else moreOrLess = "부족해요!"
                         } else {
                             standard = standard_sodium
-                            if (sodium_more) moreOrLess.text = "과다해요!"
-                            else moreOrLess.text = "부족해요!"
+                            if (sodium_more) moreOrLess = "과다해요!"
+                            else moreOrLess = "부족해요!"
                         }
+
+                        findViewById<TextView>(R.id.moreOrLess).text = moreOrLess
                     }
 
                     override fun onCancelled(databaseError: DatabaseError) {
@@ -214,16 +211,6 @@ class CompleteActivity : AppCompatActivity() {
         Log.d("SearchMenuActivity", "protein: $u_protein")
         Log.d("SearchMenuActivity", "fat: $u_fat")
 
-
-//        //과다/부족 글자 나타내기
-//        val needText = findViewById<TextView>(R.id.moreOrLess)
-//        if(a_carbohydrate > a_protein && a_carbohydrate > a_fat) {
-//            needText.text = setText(r_carbohydrate)
-//        } else if(a_protein > a_carbohydrate && a_protein > a_fat) {
-//            needText.text = setText(r_protein)
-//        } else if(a_fat > a_carbohydrate && a_fat > a_protein) {
-//            needText.text = setText(r_fat)
-//        }
 
         findViewById<ImageButton>(R.id.backBtn).setOnClickListener {
             intent = Intent(this, SearchRestaurantActivity::class.java)
@@ -293,20 +280,6 @@ class CompleteActivity : AppCompatActivity() {
         else if (largest == array[2]) return "지방"
         else if (largest == array[3]) return "당류"
         else return "나트륨"
-//        return when {
-////            carbohydrate > protein && carbohydrate > fat &&  -> "탄수화물"
-////            protein > carbohydrate && protein > fat -> "단백질"
-////            fat > carbohydrate && fat > protein -> "지방"
-////            else -> ""
-//        }
     }
-
-//    fun setText(result: Double): String{
-//        return when {
-//            result > 0 -> "부족해요!"
-//            result < 0 -> "과다해요!"
-//            else -> ""
-//        }
-//    }
 
 }

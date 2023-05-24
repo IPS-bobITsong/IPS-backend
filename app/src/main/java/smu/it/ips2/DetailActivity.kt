@@ -31,8 +31,6 @@ class DetailActivity : AppCompatActivity() {
             //findViewById<TextView>(R.id.textViewNotice).text = "함량이 적은 메뉴 둘러보기"
         }
 
-        // findViewById<TextView>(R.id.textViewNotice).text = "메뉴 둘러보기"
-
 
         val standard = intent.getDoubleExtra("standard", 0.0) // 비교할 standard 값
 

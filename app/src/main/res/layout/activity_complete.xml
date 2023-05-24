@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="30"
-                android:textColor="@color/btnColor"
+                android:textColor="#f44336"
                 android:textSize="10pt"
                 android:textStyle="bold" />
 
@@ -137,7 +137,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="New! "
-                android:textColor="#FF3D3D"
+                android:textColor="#f44336"
                 android:textSize="12pt"
                 android:textStyle="bold" />
 
@@ -356,7 +356,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="(영양성분)"
-                android:textColor="#FF3D3D"
+                android:textColor="#f44336"
                 android:textSize="12pt"
                 android:textStyle="bold" />
 

@@ -19,7 +19,6 @@ class SearchRestaurantActivity() : AppCompatActivity() {
     var firestore : FirebaseFirestore? = null
 
     private lateinit var recyclerView: RecyclerView
-//    private lateinit var recyclerViewAdapter: SearchRestaurantActivity.RecyclerViewAdapter
     private lateinit var progressDialog: ProgressDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,31 +65,6 @@ class SearchRestaurantActivity() : AppCompatActivity() {
     inner class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val storeBook: ArrayList<RestaurantBook> = arrayListOf()
         private val uniqueResNames: HashSet<String> = hashSetOf()
-        // 실시간 업데이트 시 사용 코드
-//        init {
-//            // 파이어스토어 인스턴스 초기화
-//            firestore = FirebaseFirestore.getInstance()
-//
-//            // 데이터 로딩 시작 시 프로그레스 다이얼로그 표시
-//            progressDialog.show()
-//
-//
-//            // storeBook의 문서를 불러온 뒤 RestaurantBook으로 변환해 ArrayList에 담음
-//            firestore?.collection("restaurantbook")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-//                // ArrayList 비워줌
-//                storeBook.clear()
-//
-//                for (snapshot in querySnapshot!!.documents) {
-//                    var item = snapshot.toObject(RestaurantBook::class.java)
-//                    storeBook.add(item!!)
-//                }
-//                notifyDataSetChanged()
-//
-//                // 데이터 로딩 완료 시 프로그레스 다이얼로그 숨김
-//                onDataLoaded()
-//            }
-//        }
-        // 위에보다 속도는 빠른데, 한 번만 가져옴
 
         init {
             // 파이어스토어 인스턴스 초기화

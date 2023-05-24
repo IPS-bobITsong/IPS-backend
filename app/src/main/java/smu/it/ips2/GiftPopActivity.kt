@@ -40,7 +40,7 @@ class GiftPopActivity : AppCompatActivity() {
                 val currentValue = dataSnapshot.getValue(String::class.java) // 현재 값 가져오기
 
                 // 현재 값에서 변화시킬 작업 수행
-                val newValue = (currentValue?.toIntOrNull() ?: 0) - 400 // 현재 값에 400 삭제
+                val newValue = (currentValue?.toIntOrNull() ?: 0) - 300 // 현재 값에 400 삭제
 
                 // 데이터 수정
                 ref.setValue(newValue.toString())
