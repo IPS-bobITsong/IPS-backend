@@ -113,7 +113,7 @@
     <!-- 광고 배너 -->
     <ImageView
         android:id="@+id/adBanner"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="120dp"
         android:scaleType="fitXY"
         android:src="@drawable/ad1"

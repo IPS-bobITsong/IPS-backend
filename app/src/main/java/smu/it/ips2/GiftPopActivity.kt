@@ -40,13 +40,13 @@ class GiftPopActivity : AppCompatActivity() {
                 val currentValue = dataSnapshot.getValue(String::class.java) // 현재 값 가져오기
 
                 // 현재 값에서 변화시킬 작업 수행
-                val newValue = (currentValue?.toIntOrNull() ?: 0) - 300 // 현재 값에 400 삭제
+                val newValue = (currentValue?.toIntOrNull() ?: 0) - 300 // 현재 값에 300 삭제
 
                 // 데이터 수정
                 ref.setValue(newValue.toString())
                     .addOnSuccessListener {
                         // 수정 성공
-                        Toast.makeText(this@GiftPopActivity, "400p 차감되었습니다", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@GiftPopActivity, "300p 차감되었습니다", Toast.LENGTH_SHORT).show()
                         // 원하는 작업 수행 or 메시지 표시 가능
                     }
                     .addOnFailureListener { exception ->
