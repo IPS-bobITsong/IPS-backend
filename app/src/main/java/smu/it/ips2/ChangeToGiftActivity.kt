@@ -68,7 +68,7 @@ class ChangeToGiftActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.gift_icecream).setOnClickListener {
-            if (userPoint!!.toInt() >= 400) {
+            if (userPoint!!.toInt() >= 300) {
                 intent = Intent(this, GiftPopActivity::class.java)
                 intent.putExtra("giftName", "BR 싱글레귤러 컵/콘")
             } else intent = Intent(this, GiftPopFailedActivity::class.java)
@@ -76,7 +76,7 @@ class ChangeToGiftActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.gift_coffee).setOnClickListener {
-            if (userPoint!!.toInt() >= 400) {
+            if (userPoint!!.toInt() >= 300) {
                 intent = Intent(this, GiftPopActivity::class.java)
                 intent.putExtra("giftName", "컴포즈 커피 3000원")
             } else intent = Intent(this, GiftPopFailedActivity::class.java)
@@ -84,7 +84,7 @@ class ChangeToGiftActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.gift_bubbletea).setOnClickListener {
-            if (userPoint!!.toInt() >= 400) {
+            if (userPoint!!.toInt() >= 300) {
                 intent = Intent(this, GiftPopActivity::class.java)
                 intent.putExtra("giftName", "아마스빈 3000원")
             } else intent = Intent(this, GiftPopFailedActivity::class.java)
@@ -92,7 +92,7 @@ class ChangeToGiftActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.gift_gs).setOnClickListener {
-            if (userPoint!!.toInt() >= 400) {
+            if (userPoint!!.toInt() >= 300) {
                 intent = Intent(this, GiftPopActivity::class.java)
                 intent.putExtra("giftName", "GS25 3000원")
             } else intent = Intent(this, GiftPopFailedActivity::class.java)

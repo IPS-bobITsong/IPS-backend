@@ -200,7 +200,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="400p"
+                    android:text="300p"
                     android:textColor="#f44336"
                     android:textSize="8pt"
                     android:textStyle="bold" />
